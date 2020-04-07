@@ -480,7 +480,7 @@ header .main-menu li.drop-down a.mouseover + ul.drop-down-menu{ display: block;
 .bg-7{ background: url("/static/images/latest_articles_3_400x250.jpg") no-repeat center; background-size: cover; }
 .bg-8{ background: url("/static/images/latest_articles_4_400x600.jpg") no-repeat center; background-size: cover; }
 .bg-9{ background: url("/static/images/latest_articles_1_400x500.jpg") no-repeat center; background-size: cover; }
-.bg-10{ background: url("/static/images/latest_articles_2_400x300.jpg") no-repeat center; background-size: cover; }
+.bg-10{  background-size: cover; }
 .bg-11{ background: url("/static/images/slider_3_1900x600.jpg") no-repeat center; background-size: cover; }
 .bg-12{ background: url("/static/images/sidebar_1_400X300.jpg") no-repeat center; background-size: cover; }
 .bg-13{ background: url("/static/images/slider_5_1600x1000.jpg") no-repeat center; background-size: cover; }

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 cat = (
     ('Events','Events'),
     ('Articles','Articles'),
@@ -27,6 +28,7 @@ class Posts(models.Model):
         ('Publish','Publish'),
     )
     title = models.CharField(max_length=200, default='')
+                                    
     post_image = models.ImageField(upload_to='media/pics', default='/static/images/campus.jpg')
     desc = models.TextField()
     uploaded_date = models.DateTimeField(auto_now_add=True)
@@ -35,6 +37,7 @@ class Posts(models.Model):
     likes = models.IntegerField(default=0,blank=True,null=True)
     author = models.ForeignKey(User,on_delete=models.CASCADE)
     slug = models.SlugField(max_length=200)
+    post_link = models.URLField(max_length=200,null=True,blank=True)
     is_hot = models.BooleanField(default= False, null= True, blank= True)
     status = models.CharField(max_length=20 , choices=status_choices, default='Draft')
 
