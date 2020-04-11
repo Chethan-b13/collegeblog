@@ -1,6 +1,6 @@
-from django.shortcuts import render 
+from django.shortcuts import render , get_object_or_404
 from django.views import generic
-from .models import Posts
+from .models import Posts,UserInfo
 from django import template
 
 register = template.Library()
@@ -35,6 +35,8 @@ class Indexview(generic.ListView):
 #     return render(request,'blog/index.html',{'News':News,'Top':Top})
 
 def detailview(request,id,slug):
-    Post = Posts.objects.get(id=id)
-    ManyPosts = Posts.objects.filter(category=Post.category).order_by('-likes')[:3]
+    Post = get_object_or_404(Posts,pk=id)
+    ManyPosts = Posts.objects.filter(category=Post.category).order_by('-likes')[:4]
     return render(request,'blog/detail.html',{'Post':Post,'Cat_posts':ManyPosts})
+
+

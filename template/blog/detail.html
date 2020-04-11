@@ -32,9 +32,13 @@
 					<h5 class="mb-30 color-ash"><b>{{Post.category}}</b></h5>
 					<h3 class="mtb-50"><b>“{{Post.title}}”</b></h3>
 					<p class="mt-40 mt-sm-10">{{Post.desc}}</p>	
-					{% if Post.post_link %}	
+					{% if Post.post_link  %}	
 					<h4 class="mb-30 mtb-50 text-info"><a href="{{Post.post_link}}"><i>{{Post.post_link}}</i></a></h4>
 					{% endif %}
+					{% if Post.author.user_link  %}	
+					<h4 class="mb-30 mtb-50 text-info"><a href="{{Post.author.user_link }}"><i>{{Post.author.user_link }}</i></a></h4>
+					{% endif %}
+					<hr>
 					<!-- <p class="mb-50">Though I was eager to share the results of the experiment with others who suffer from depression or other mood issues, my previous book, 
 					Love and Treasure, was a novel set against the backdrop of the Holocaust in Hungary. 
 					In support of that novel, I traveled around the country from Jewish community center to synagogue to Jewish book club.</p> -->
@@ -46,7 +50,7 @@
 							
 							<div class="sided-70x">
 								<div class="s-left">
-									<img src="images/profile.jpg" alt="">
+									<img src="/media/{{Post.author.profile_pic}}" alt="">
 								</div><!-- s-left-->
 								
 								<div class="s-right">

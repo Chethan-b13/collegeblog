@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(default='', max_length=200)),
-                ('post_image', models.ImageField(default='/static/images/campus.jpg', upload_to='media/pics')),
+                ('post_image', models.ImageField(default='/media/media/pics/campus.jpg', upload_to='media/pics')),
                 ('desc', models.TextField()),
                 ('uploaded_date', models.DateTimeField(auto_now_add=True)),
                 ('updated_date', models.DateTimeField(auto_now=True)),

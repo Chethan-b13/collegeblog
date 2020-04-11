@@ -2,12 +2,16 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-cat = (
-    ('Events','Events'),
-    ('Articles','Articles'),
-    ('Art','Art'),
-)
+class UserInfo(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    profile_pic = models.ImageField(upload_to='profile_pics', blank=True,  default='/profile_pics/def.jpg')
+    user_link = models.URLField(max_length=200, blank=True)
 
+    def __str__(self):
+        return self.user.username
+
+    class Meta:
+        verbose_name_plural =  'UserInfos'   
  
 
 class Category(models.Model):
@@ -29,13 +33,13 @@ class Posts(models.Model):
     )
     title = models.CharField(max_length=200, default='')
                                     
-    post_image = models.ImageField(upload_to='media/pics', default='/static/images/campus.jpg')
+    post_image = models.ImageField(upload_to='pics', default='/pics/campus.jpg')
     desc = models.TextField()
     uploaded_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     likes = models.IntegerField(default=0,blank=True,null=True)
-    author = models.ForeignKey(User,on_delete=models.CASCADE)
+    author = models.ForeignKey(UserInfo,on_delete=models.CASCADE)
     slug = models.SlugField(max_length=200)
     post_link = models.URLField(max_length=200,null=True,blank=True)
     is_hot = models.BooleanField(default= False, null= True, blank= True)

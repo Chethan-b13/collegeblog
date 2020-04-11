@@ -1,0 +1,37 @@
+
+{% extends 'accounts/base.html' %}
+
+{%block title %}
+Register
+{% endblock %}
+
+
+{% block content %}
+<form class="form-detail" action="{% url 'accounts:register' %}" method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	
+	<h2>Register Your Account</h2>
+	{% for field in form %}
+	<div class="form-row" style="margin-top: 20px;">
+		<label for="full-name">{{field.label_tag}}</label>
+		<div id="full-name" class="input-text">
+			{{ field }}
+		</div>
+		{% if field.help_text %}
+			<small style="color: gray;">{{ field.help_text }}</small>
+		{% endif %}
+		
+		{% for error in field.errors %}
+			<p style="color: rgb(187, 42, 42);">{{ error }}</p>
+		{% endfor %}
+	</div>
+	{% endfor %}	
+	<div class="form-row-last">
+		<input type="submit" name="register" class="register" value="Register">
+	</div> 
+	<a href="{% url 'accounts:login' %}" style="padding-left: 10%;">Already have a account?</a>
+	
+</form>
+{% endblock %}
+				
+			

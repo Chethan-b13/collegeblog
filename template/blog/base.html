@@ -25,8 +25,8 @@
 		<a class="logo" href="{% url 'blog:home' %}"><img src="{% static 'images/logo1.png' %}" alt="Logo" style="margin-left: 35%;"></a>
 		
 		<a class="menu-nav-icon" data-menu="#main-menu" href="#"><i class="ion-navicon"></i></a>	
-		<ul class="main-menu" id="main-menu" style="margin-right: 37%;">
-			<li><a href="index.html">Home</a></li>
+		<ul class="main-menu" id="main-menu">
+			<li><a href="{% url 'blog:home' %}">Home</a></li>
 			<li class="drop-down"><a href="#!">Articles<i class="ion-arrow-down-b"></i></a>
 				<ul class="drop-down-menu drop-down-inner">
 					<li><a href="#">Student's articles</a></li>
@@ -42,7 +42,19 @@
 			<li><a href="#">Art ShowCase</a></li>
 			<li><a href="#">About College</a></li>
 			<li><a href="#">Contact</a></li>
+			{% if user.is_authenticated %}
+				<li style="float: right; color:rgb(128, 134, 145)"><a href="#">welcome {{user.username | truncatechars:8 }}<i class="ion-ios-person"></i></a></li>
+				
+				<li style="float:right"><a href="{% url 'accounts:logout' %}">Logout</a></li>
+
+				<!-- <li style="float:right"><a href="{% url 'accounts:logout' %}">Logout</a></li> -->
+			{% else %}
+				<li style="float:right"><a href="{% url 'accounts:register' %}">Register</a></li>
+				<li style="float:right"><a href="{% url 'accounts:login' %}">Login</a></li>
+			{% endif %}
 		</ul>
+		
+		
 		
         <div class="clearfix"></div>
     </header>
