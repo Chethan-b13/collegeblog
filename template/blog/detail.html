@@ -50,7 +50,11 @@
 							
 							<div class="sided-70x">
 								<div class="s-left">
+									{% if Post.author.profile_pic %}
 									<img src="/media/{{Post.author.profile_pic}}" alt="">
+									{% else %}
+									<img src="/media/profile_pics/def.png" alt="">
+									{% endif %}
 								</div><!-- s-left-->
 								
 								<div class="s-right">
@@ -72,7 +76,9 @@
 					<div class="brdr-grey-1 mt-50 mt-sm-20"></div>
 					
 					<div class="mt-50 mb-20">
+						<h4 class="mb-30 mt-20 clearfix"><b>Related Posts</b></h4>
 						<div class="row">
+							
 							{% for CatPost in Cat_posts %}
 							{% if CatPost.id != Post.id%}
 							<div class=" col-sm-6 col-md-6 col-lg-6 col-xl-4 mb-30">

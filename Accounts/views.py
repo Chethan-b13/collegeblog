@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect
 from blog.models import UserInfo
 from django.contrib.auth.models import auth
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import SignUpForm, UserCreationForm
+from .forms import SignUpForm, UserCreationForm,PostCreationForm
+from django.template.defaultfilters import slugify
+from django.urls import reverse
 
 
 def Login(request):
@@ -56,3 +59,23 @@ def ConfirmRegister(request):
 def Logout(request):
     auth.logout(request)
     return redirect('blog:home')
+
+
+@login_required(login_url="/accounts/login/")
+def CreatePost(request):
+    if request.method == 'POST':
+        form = PostCreationForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            Post = form.save(commit=False)
+            user= UserInfo.objects.get(user=request.user)
+            Post.author = user
+            Post.slug = slugify(Post.title)
+            Post.save()
+
+            return redirect(reverse('blog:detail', kwargs={'id':Post.id,'slug':Post.slug}))
+
+    else:
+        form = PostCreationForm()
+
+    return render(request, 'accounts/CreatePost.html', {'form':form})    

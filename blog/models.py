@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.urls import reverse
 
 class UserInfo(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
@@ -27,6 +27,7 @@ class Category(models.Model):
 
 
 class Posts(models.Model):
+
     status_choices = (
         ('Draft','Draft'),
         ('Publish','Publish'),
@@ -38,12 +39,16 @@ class Posts(models.Model):
     uploaded_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    likes = models.IntegerField(default=0,blank=True,null=True)
-    author = models.ForeignKey(UserInfo,on_delete=models.CASCADE)
+    likes = models.IntegerField(default=0, blank=True,null=True)
+    author = models.ForeignKey(UserInfo, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=200)
-    post_link = models.URLField(max_length=200,null=True,blank=True)
+    post_link = models.URLField(max_length=200, null=True,blank=True)
     is_hot = models.BooleanField(default= False, null= True, blank= True)
-    status = models.CharField(max_length=20 , choices=status_choices, default='Draft')
+    status = models.CharField(max_length=20, choices=status_choices, default='Draft')
+
+
+    # def get_absolute_url(self):
+    #     return reverse('blog:detail', kwargs={'pk':self.pk, 'slug':self.slug})
 
 
     def __str__(self):

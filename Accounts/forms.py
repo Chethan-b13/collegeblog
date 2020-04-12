@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-# from blog.models import UserInfo
+from blog.models import Posts
 from django.contrib.auth.forms import UserCreationForm ,AuthenticationForm
 
 class SignUpForm(UserCreationForm):
@@ -14,7 +14,9 @@ class SignUpForm(UserCreationForm):
         # fields = ('username','email','profile_pic','user_link',"password1",'password2')
         fields = ('username', 'email', 'password1', 'password2', 'profile_pic', 'user_link')
 
-# class LoginForm(AuthenticationForm):
-#     username=
-#     class Meta:
-        
+class PostCreationForm(forms.ModelForm):
+
+    class Meta:
+        model = Posts
+        fields = ('title', 'post_image', 'desc', 'category', 'post_link', 'status')
+

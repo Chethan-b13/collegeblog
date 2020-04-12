@@ -36,9 +36,9 @@
 									
 								
 									<div class="swiper-wrapper">
-										{% for Hot in News %}
+										{% for Hot in Hot_News %}
 										<!-- data-swiper-autoplay="1000"  --> 
-										{% if Hot.is_hot %}
+										<!-- {% if Hot.is_hot %} -->
 										<div class="swiper-slide">
 											<div class="bg-white">
 												<img src="/media/{{Hot.post_image}}" alt="">
@@ -54,7 +54,7 @@
 												</div><!-- hot-news -->
 											</div><!-- hot-news -->
 										</div><!-- swiper-slide -->	
-										{% endif %}
+										<!-- {% endif %} -->
 										{% endfor %}
 									</div><!-- swiper-wrapper -->
 								</div><!-- swiper-container -->

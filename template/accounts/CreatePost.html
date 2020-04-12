@@ -1,0 +1,35 @@
+{% extends 'accounts/base.html' %}
+{% block content %}
+
+<form class="form-detail" action="{% url 'accounts:CreatePost' %}" method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	
+    <h2>Create Post</h2>
+    <!-- <div style="color: red;">
+        <p>{{ form.non_field_errors }}</p>
+    </div> -->
+        
+	{% for field in form %}
+	<div class="form-row" style="margin-top: 20px;">
+		<label for="full-name">{{field.label_tag}}</label>
+		<div id="full-name" class="input-text">
+			{{ field }}
+    </div>
+    {% if field.help_text %}
+      <small style="color: gray;">{{ field.help_text }}</small>
+    {% endif %}		
+
+    {% for error in field.errors %}
+      <p style="color: rgb(187, 42, 42);">{{ error }}</p>
+    {% endfor %}
+
+  </div>
+	{% endfor %}	
+	<div class="form-row-last">
+		<input type="submit" name="Login" class="register" value="Login">
+	</div> 
+	
+	
+</form>
+
+{% endblock %}
