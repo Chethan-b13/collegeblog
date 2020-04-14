@@ -73,7 +73,7 @@ def CreatePost(request):
             Post.slug = slugify(Post.title)
             Post.save()
 
-            return redirect(reverse('blog:detail', kwargs={'id':Post.id,'slug':Post.slug}))
+            return redirect(reverse('blog:detail', kwargs={'id':Post.id, 'slug':Post.slug}))
 
     else:
         form = PostCreationForm()

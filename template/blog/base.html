@@ -13,10 +13,10 @@
 	<!-- Stylesheets -->
 	
 	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+	<!-- <link href="{% static 'css/bootstrap.min.css.map' %}" rel="stylesheet" type="text/css"> -->
 	<link href="{% static 'css/swiper.css' %}" rel="stylesheet">
 	<link href="{% static 'fonts/ionicons.css' %}" rel="stylesheet">
 	<link href="{% static 'css/styles.css' %}" rel="stylesheet">
-	
 	
 </head>
 <body>
@@ -49,15 +49,19 @@
 
 				<!-- <li style="float:right"><a href="{% url 'accounts:logout' %}">Logout</a></li> -->
 			{% else %}
-				<li style="float:right"><a href="{% url 'accounts:register' %}">Register</a></li>
-				<li style="float:right"><a href="{% url 'accounts:login' %}">Login</a></li>
+			<li style="float:right"><a href="{% url 'accounts:register' %}">Signup</a></li>
+			<li style="float:right"><a href="{% url 'accounts:login' %}">Login</a></li>
 			{% endif %}
 		</ul>
+		<div class="clearfix"></div>
 		
-		
-		
-        <div class="clearfix"></div>
-    </header>
+
+
+	</header>
+
+
+	
+ 
     {% block content %}
 
 
@@ -122,6 +126,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			</div><!-- row -->
 		</div><!-- container -->
 	</footer>
+
+	<!-- script for signup popup -->
+
 
 	<!-- SCIPTS -->
 	<script src="{% static 'js/tether.min.js' %}"></script>

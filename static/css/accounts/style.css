@@ -4,7 +4,7 @@ body {
 .page-content {
 	width: 100%;
 	margin:  0 auto;
-	background: #656b6b;
+	background: darkslategray;
 	display: flex;
 	display: -webkit-flex;
 	justify-content: center;
@@ -27,6 +27,7 @@ body {
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 100px;
 	margin: 175px 0;
+	margin-bottom: 20px;
 	font-family: 'Roboto', sans-serif;
 	color: #333;
 	font-weight: 400;
@@ -154,4 +155,23 @@ input:-moz-placeholder { /* Firefox 18- */
 	.form-v5-content {
 	    margin: 175px 20px;
 	}
+}
+
+.back-button{
+	background: darkslategray;
+	padding-left: 40px;
+	padding-top: 20px;
+	
+}
+
+.back-button button {
+	font-size: x-large;
+	border: 0px;
+	background: darkslategray;
+	color: white;
+	font-weight: bolder;
+}
+
+.back-button button:hover{
+	color: black;
 }
