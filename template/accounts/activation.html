@@ -1,0 +1,12 @@
+{% autoescape off %}
+
+Hi {{user.username}}
+Please click this link below to verify your account 
+
+http://{{domain}}{% url 'accounts:activate' uidb64=uid token=token %}
+
+<p style="color: orangered;">If that doesn't work copy and paste it in browser</p> 
+
+
+
+{% endautoescape %}

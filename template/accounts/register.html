@@ -1,37 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>RegistrationForm_v10 by Colorlib</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{% extends 'accounts/base.html' %}
-
-{%block title %}
-Register
-{% endblock %}
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
 
-{% block content %}
-<form class="form-detail" action="{% url 'accounts:register' %}" method="POST" enctype="multipart/form-data">
-	{% csrf_token %}
-	
-	<h2>Register Your Account</h2>
-	{% for field in form %}
-	<div class="form-row" style="margin-top: 20px;">
-		<label for="full-name">{{field.label_tag}}</label><br>
-		<div id="full-name" class="input-text">
-			{{ field }}
+		<!-- LINEARICONS -->
+		<link rel="stylesheet" href="{% static 'fonts/authsystem/signup/linearicons/style.css' %}">
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="{% static 'css/authsystem/signup/style.css' %}">
+	</head>
+
+<body>
+		{% if messages %}
+		<div style="text-align: center;">
+			<h1>Thank you For Registering</h1>
+			<hr >
+			{% for message in messages%}
+				<p style="color: rgb(95, 0, 0);">{{message}}</p>
+			{% endfor %}
+			<button>
+				<span>Login</span>
+			</button>
 		</div>
-		{% if field.help_text %}
-			<small style="color: gray;">{{ field.help_text }}</small>
-		{% endif %}
-		
-		{% for error in field.errors %}
-			<p style="color: rgb(187, 42, 42);">{{ error }}</p>
-		{% endfor %}
-	</div>
-	{% endfor %}	
-	<div class="form-row-last">
-		<input type="submit" name="register" class="register" value="Register">
-	</div> 
-	<a href="{% url 'accounts:login' %}" style="padding-left: 10%;">Already have a account?</a>
-	
-</form>
-{% endblock %}
-				
+		{% else %}
+
+		<div class="wrapper">
+			<div class="inner">
+				<img src="{% static 'images/authsystem/image-1.png' %}" alt="" class="image-1">
+				<form action="{% url 'accounts:register' %}" method="POST">
+					{% csrf_token %}
+
+					<h3>Create Account</h3>
+					<div class="form-holder">
+						<span class="lnr lnr-user"></span>
+						<div class="form-control">
+							{{ form.username }}
+						</div>
+						<div class="error">
+
+							{% for error in form.username.errors %}
+							<p style="color: rgb(187, 42, 42);">{{ error }}</p>
+							{% endfor %}
+
+						</div>
+						
+						<!-- <input type="text" class="form-control" placeholder="Username"> -->
+					</div>
+					<div class="form-holder">
+						<span class="lnr lnr-phone-handset"></span>
+						<div class="form-control">
+							{{ form.Phone_number }}
+						</div>
+						<div class="error">
+							{% for error in form.Phone_number.errors %}
+							<p style="color: rgb(187, 42, 42);">{{ error }}</p>
+							{% endfor %}
+						</div>
+					</div>
+					<div class="form-holder">
+						<span class="lnr lnr-envelope"></span>
+						<div class="form-control">
+							{{ form.email }}
+						</div>
+						<div class="error">
+							{% for error in form.email.errors %}
+							<p style="color: rgb(187, 42, 42);">{{ error }}</p>
+							{% endfor %}
+						</div>
+					</div>
+					<div class="form-holder">
+						<span class="lnr lnr-lock"></span>
+						<div class="form-control">
+							{{ form.password1 }}
+						</div>
+						<div class="error">
+							{% for error in form.password1.errors %}
+							<p style="color: rgb(187, 42, 42);">{{ error }}</p>
+							{% endfor %}
+						</div>
+					</div>
+					<div class="form-holder">
+						<span class="lnr lnr-lock"></span>
+						<div class="form-control">
+							{{ form.password2 }}
+						</div>
+						<div class="error">
+							{% for error in form.password2.errors %}
+							<p style="color: rgb(187, 42, 42);">{{ error }}</p>
+							{% endfor %}
+						</div>
+					</div>
+					
+					<button type="submit">
+						<span>Register</span>
+					</button>
+
+					<a href="{% url 'accounts:login' %}">&rArr;Login</a>
+
+				</form>
+				<img src="{% static 'images/authsystem/image-2.png' %}" alt="" class="image-2">
+			</div>
 			
+		</div>
+		
+		{% endif %}
+		<script src="{% static 'js/authsystem/signup/jquery-3.3.1.min.js' %}"></script>
+		<script src="{% static 'js/authsystem/signup/main.js' %}"></script>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<!-- Popper JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

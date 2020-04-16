@@ -3,9 +3,11 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 class UserInfo(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
-    profile_pic = models.ImageField(upload_to='profile_pics', blank=True,  default='/profile_pics/def.jpg')
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_number = models.CharField(max_length=12, blank=True, default='')
+    profile_pic = models.ImageField(upload_to='profile_pics', blank=True, default='/profile_pics/def.jpg')
     user_link = models.URLField(max_length=200, blank=True)
+    
 
     def __str__(self):
         return self.user.username
