@@ -35,7 +35,7 @@ SECRET_KEY = 'g=q1y5+j0fc+c$5anc!6d&uzejt!m4rf=6c5#lwo$lsar63(%1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','192.168.2.18']
 
 
 # Application definition
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
     
 ]
 
@@ -59,7 +60,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 ROOT_URLCONF = 'collegeblog.urls'
 
@@ -74,6 +84,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -142,3 +154,11 @@ STATIC_ROOT = os.path.join(BASE_DIR,'assets')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
+
+LOGIN_REDIRECT_URL = 'blog:home'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '307891520079-v4q8snjfjm21r1t8ihei437193ml2u2d.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'hLGMd6d2EX6vxnn6_PXabxOi'
+SOCIAL_AUTH_FACEBOOK_KEY = '1130574253989091'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'eb37426e0efdbbea1107b8d5234521c9'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.10'

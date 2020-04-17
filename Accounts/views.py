@@ -28,10 +28,10 @@ def Login(request):
                 login(request, user)
                 return redirect('blog:home')
             else:
-                messages.add_message(request, messages.info, 'Confirm Email')
+                messages.info(request, 'Confirm Email')
                 return redirect('accounts:login')
         else:
-            messages.add_message(request, messages.error, 'Invalid Credential')
+            messages.info(request, 'Invalid Credential')
             return redirect('accounts:login')
     else:
         return render(request, 'accounts/login.html')

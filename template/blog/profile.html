@@ -1,0 +1,158 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+	
+{% block content %}
+
+	<div class="slider-main h-500x h-sm-auto pos-relative pt-95 pb-25">
+		<div class="img-bg bg-1 bg-layer-4" style="background: url('/static/images/profile/prof.jpeg') no-repeat center;  background-size: cover;"></div>
+		<div class="container-fluid h-100 mt-xs-50">
+			<div class="dplay-tbl">
+				<div class="dplay-tbl-cell color-white text-center">
+				
+					<h1 class="ptb-50"><b> User Profile</b></h1>
+					
+				</div><!-- dplay-tbl-cell -->
+			</div><!-- dplay-tbl -->
+		</div><!-- container -->
+	</div><!-- slider-main -->
+	
+
+    
+    <section class="hero-section spad">
+		<div class="container-fluid">
+			<div class="row" style="margin-right: -50px;">
+				<div class="col-xl-10 offset-xl-1">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="hero-text">
+								<h2 style="font-family: 'Josefin Sans'">{{USER.user.username}}</h2>
+								{% if USER.user.username == request.user.username %}
+									{% if USER.user_bio %}
+										<p>{{USER.user_bio}}</p>
+									{% else %}
+									    <div class="addbio">
+											<a href=""><h3>Add Bio <i class="ion-android-add"></i></h3></a>
+										</div>
+									{% endif %}
+								{% endif %}
+							</div>
+							<div class="hero-info">
+								<h2 style="font-family: 'Josefin Sans'">General Info</h2>
+								<ul>
+									<!-- <li><span>Date of Birth</span>Aug 25, 1988</li>
+									<li><span>Address</span>Rosia Road 55, Gibraltar, UK</li> -->
+									<li><span>E-mail:</span>{{USER.user.email}}</li>
+									{% if USER.user_link %}
+										<li><span>Social Links:</span><a href="{{USER.user_link}}" style="color: blue;">{{USER.user_link}}</a></li>
+									{% endif %}
+									{% if USER.user_number %}
+										<li><span>Number:</span>{{USER.user_number}}</li>
+									{% endif %}
+
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-6 img-circle">
+							<figure class="hero-image ">
+								<img src="/media/{{USER.profile_pic}}" alt="5">
+							</figure>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </section>
+	
+	
+	<section class="bg-1-white ptb-0">
+		<div class="container-fluid">
+			<div class="row" >
+				<div class="col-lg-1"></div>
+					<div class="col-md-12 col-lg-8 ptb-50 pr-30 pr-md-15">
+						<div class="mt-50 mb-20">
+							{% if USER.user.username == request.user.username %}
+							<h2 style="font-family: 'Josefin Sans'" class="mb-30 mt-20 clearfix text-center"><b>My Posts</b></h2><hr>
+							{% else %}
+							<h2 style="font-family: 'Josefin Sans'" class="mb-30 mt-20 clearfix text-center"><b>User Post</b></h2><hr>
+							{% endif %}
+							<div class="row">
+								
+								{% for CatPost in Cat_posts %}
+								{% if CatPost.id != Post.id%}
+								
+									<div class=" col-sm-6 col-md-6 col-lg-6 col-xl-4 mb-30 ">
+										<div class="card h-100 min-h-350x">
+											<div class="bg-white h-100 zoom">
+												<!-- SETTING IMAGE WITH bg-10 -->
+												
+												<div class="h-50 " style="background: url('/media/{{CatPost.post_image}}') no-repeat center; background-size: cover; "></div>
+												<a href="{% url 'blog:detail' CatPost.id CatPost.slug %}" style="display: block;">
+												
+												<div class="plr-25 ptb-15 h-50">
+													<div class="dplay-tbl">
+														<div class="dplay-tbl-cell">
+														
+															<h5 class="color-ash"><b>{{CatPost.category}}</b></h5>
+															<h4 class="mtb-10">
+																<a href="{% url 'blog:detail' CatPost.id CatPost.slug %}"><b>{{CatPost.title}}</b></a></h4>
+															<ul class="list-li-mr-10 color-lt-black">
+																<li><i class="mr-5 font-12 ion-android-favorite-outline"></i>{{CatPost.likes}}</li>
+																<li><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li>
+
+																{% if USER.user.username == request.user.username %}
+																<div style="float: right; font-size:x-large;">
+																<li><a href=""><i class="mr-5 font-12 ion-android-delete" style="color: rgb(255, 112, 112);"></i></a></li>
+																<li><a href=""><i class="mr-5 font-12 ion-edit"></i></a></li>
+																
+																</div>
+
+																
+																	
+																{% endif %}
+															</ul>
+															
+														</div><!-- dplay-tbl-cell -->
+													</div><!-- dplay-tbl -->
+												</div><!-- plr-25 ptb-15 -->
+											</a>
+											</div><!-- hot-news -->
+										</div><!-- card -->
+									</div> 
+								
+								{% endif %}
+								{% endfor %}
+							</div><!-- row-->	
+						</div><!-- mt-50 mb-20-->	
+					</div>
+
+					<div class="col-md-12 col-lg-3 bg-2-white ptb-50 pl-30 pl-md-15">
+						<div class="row">
+							<div class="col-md-12 col-lg-8">
+								<div class="mx-w-md-400x mlr-md-auto">
+								
+									<div class="mb-50">
+										<h5 class="mb-30"><b>TOP STORIES</b></h5>
+										{% for Top4 in Top4_side %}
+										<div class="sided-80x mb-20">
+											<div class="s-left img-hover-zoom" style="overflow: hidden;">
+												<img src="/media/{{Top4.post_image}}" alt="">
+											</div><!-- s-left -->
+											<div class="s-right">
+												<h5 class="pt-5"  style="overflow-x: hidden;width: 100px;"><a href="{% url 'blog:detail' Top4.id Top4.slug %}"><b>{{Top4.title}}</b></a></h5>
+											</div><!-- s-left -->
+										</div><!-- sided-80x -->
+										{% endfor %}
+					
+										
+									</div><!-- mb-50 -->
+
+								</div><!-- mx-w-400 -->
+							</div><!-- col-sm-9 -->
+						</div><!-- row -->
+					</div><!-- col-sm-3 -->
+				</div>
+			</div>		
+		</section>
+	
+	
+{% endblock %}

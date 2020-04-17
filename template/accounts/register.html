@@ -28,13 +28,18 @@
 			</button>
 		</div>
 		{% else %}
-
+		
 		<div class="wrapper">
 			<div class="inner">
 				<img src="{% static 'images/authsystem/image-1.png' %}" alt="" class="image-1">
 				<form action="{% url 'accounts:register' %}" method="POST">
 					{% csrf_token %}
-
+					<div class="container text-center" style="margin-bottom: 20px;">
+						<a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary btn-sm">facebook</a>
+						<a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger btn-sm">google+</a>
+						<p>--OR--</p>
+					</div>
+					
 					<h3>Create Account</h3>
 					<div class="form-holder">
 						<span class="lnr lnr-user"></span>

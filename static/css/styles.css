@@ -110,6 +110,8 @@ textarea:focus{ outline-color: #F9B500; }
 	
 }
 
+
+
 @media only screen and (max-width: 767px) {
 	
 	p{ line-height: 1.4; }
@@ -305,6 +307,14 @@ header .main-menu li.drop-down a.mouseover + ul.drop-down-menu{ display: block;
 }
 
 
+
+.author{
+	color: black;
+	transition: .2s;
+}
+.author:hover{
+	transform: scale(1.2);
+}
 
 /* ---------------------------------
 2. COMMONS FOR PAGE DESIGN
@@ -589,7 +599,24 @@ header .main-menu li.drop-down a.mouseover + ul.drop-down-menu{ display: block;
 
 .bg-white{ background: #fff; }
 
+  /* [2] Transition property for smooth transformation of images */
+.img-hover-zoom  img{
+	transition: transform .5s ease;
+  }
+  
+  /* [3] Finally, transforming the image when container gets hovered */
+.img-hover-zoom:hover img{
+	transform: scale(1.5);
+  }
 
+.zoom{
+	transition: .4s;
+	overflow: hidden;
+}
+
+.zoom:hover{
+	transform: scale(0.85);
+}
 
 /* RESPONSIVE */
 

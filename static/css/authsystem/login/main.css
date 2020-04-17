@@ -147,9 +147,9 @@ iframe {
   color: #666666;
 }
 
-form p{
+#error{
   font-family: Poppins-Regular;
-  color: rgb(187, 42, 42);
+  /* color: red; */
   text-align: center;
 }
 

@@ -6,6 +6,24 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
+
+
+
+	<link href="img/favicon.ico" rel="shortcut icon"/>
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="{% static 'css/profile/bootstrap.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/profile/font-awesome.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/profile/flaticon.css' %}"/>
+	<!-- <link rel="stylesheet" href="{% static 'css/profile/owl.carousel.css' %}"/> -->
+	<link rel="stylesheet" href="{% static 'css/profile/magnific-popup.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/profile/style.css' %}"/>
+
+
+
 	
 	<!-- Font -->
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
@@ -20,7 +38,9 @@
 	
 </head>
 <body>
-	
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
 	<header>
 		<a class="logo" href="{% url 'blog:home' %}"><img src="{% static 'images/logo1.png' %}" alt="Logo" style="margin-left: 35%;"></a>
 		
@@ -43,7 +63,7 @@
 			<li><a href="#">About College</a></li>
 			<li><a href="#">Contact</a></li>
 			{% if user.is_authenticated %}
-				<li style="float: right; color:rgb(128, 134, 145)"><a href="#">welcome {{user.username | truncatechars:8 }}<i class="ion-ios-person"></i></a></li>
+				<li style="float: right; color:rgb(128, 134, 145)"><a href="{% url 'blog:profile' user.pk user.username%}">welcome {{user.username | truncatechars:8 }}<i class="ion-ios-person"></i></a></li>
 				
 				<li style="float:right"><a href="{% url 'accounts:logout' %}">Logout</a></li>
 
@@ -136,6 +156,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
 	<script src="{% static 'js/swiper.js' %}"></script>
 	<script src="{% static 'js/scripts.js' %}"></script>
+
+
+	
+    <script src="{% static 'js/profile/jquery-2.1.4.min.js' %}"></script>
+	<script src="{% static 'js/profile/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/profile/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'js/profile/magnific-popup.min.js' %}"></script>
+	<script src="{% static 'js/profile/circle-progress.min.js' %}"></script>
+	<script src="{% static 'js/profile/main.js' %}"></script>
 	
 </body>
 </html>

@@ -5,6 +5,8 @@
 	<title>Login V1</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="{% static 'images/authsystem/icons/favicon.ico' %}"/>
 <!--===============================================================================================-->
@@ -33,12 +35,19 @@
 
 				<form class="login100-form validate-form" method="POST" action="{% url 'accounts:login' %}">
 					{% csrf_token %}
+					<div class="container text-center" style="margin-bottom: 20px; ">
+						<a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary btn-sm">facebook</a>
+						<a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger btn-sm">google+</a>
+						<p style="color:gray">--OR--</p>
+					</div>
 					<span class="login100-form-title">
 						Member Login
 					</span>
 					{% if messages %}
 					{% for message in messages%}
-						<p>{{message}}</p>
+						<div id="error">
+							<p style="color: red;">{{message}}</p>
+						</div>
 					{% endfor %}
 					{% endif %}
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
@@ -102,6 +111,16 @@
 	</script>
 <!--===============================================================================================-->
 	<script src="{% static 'js/authsystem/login/main.js' %}"></script>
+
+
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    
 
 </body>
 </html>

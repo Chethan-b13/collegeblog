@@ -32,11 +32,13 @@
 					<h5 class="mb-30 color-ash"><b>{{Post.category}}</b></h5>
 					<h3 class="mtb-50"><b>“{{Post.title}}”</b></h3>
 					<p class="mt-40 mt-sm-10">{{Post.desc}}</p>	
+					<h5 class="mb-30 mtb-40 color-facebook"><b>Links :</b></h5>
+
 					{% if Post.post_link  %}	
-					<h4 class="mb-30 mtb-50 text-info"><a href="{{Post.post_link}}"><i>{{Post.post_link}}</i></a></h4>
+						<h4 class="mb-30 mtb-50 ">Post Related : <a href="{{Post.post_link}}" class="text-info"> {{Post.post_link | truncatechars:60 }} </a></h4>
 					{% endif %}
 					{% if Post.author.user_link  %}	
-					<h4 class="mb-30 mtb-50 text-info"><a href="{{Post.author.user_link }}"><i>{{Post.author.user_link }}</i></a></h4>
+						<h4 class="mb-30 mtb-50 ">User Related : <a href="{{Post.author.user_link }}" class="text-info"> {{Post.author.user_link }}</a></h4>
 					{% endif %}
 					<hr>
 					<!-- <p class="mb-50">Though I was eager to share the results of the experiment with others who suffer from depression or other mood issues, my previous book, 
@@ -51,14 +53,14 @@
 							<div class="sided-70x">
 								<div class="s-left">
 									{% if Post.author.profile_pic %}
-									<img src="/media/{{Post.author.profile_pic}}" alt="">
+									<a href="{% url 'blog:profile' id=Post.author.user.id username=Post.author %}"><img src="/media/{{Post.author.profile_pic}}" alt="" class="zoom"></a>
 									{% else %}
 									<img src="/media/profile_pics/def.png" alt="">
 									{% endif %}
 								</div><!-- s-left-->
 								
 								<div class="s-right">
-									<p class="ptb-20 color-ash"><b>{{Post.author}} - {{Post.uploaded_date}}</b></p>
+									<p class="ptb-20 color-ash" style="margin-right: -5px;"><b> <a href="{% url 'blog:profile' id=Post.author.user.id username=Post.author %}" class="author">{{Post.author}} </a> - {{Post.uploaded_date}}</b></p>
 								</div>
 							</div><!-- sided-80x-->
 						</div><!-- col-md-6-->
@@ -83,7 +85,7 @@
 							{% if CatPost.id != Post.id%}
 							<div class=" col-sm-6 col-md-6 col-lg-6 col-xl-4 mb-30">
 								<div class="card h-100 min-h-350x">
-									<div class="bg-white h-100">
+									<div class="bg-white h-100 zoom">
 									
 										<!-- SETTING IMAGE WITH bg-10 -->
 										<div class="h-50" style="background: url('/media/{{CatPost.post_image}}') no-repeat center; background-size: cover;"></div>

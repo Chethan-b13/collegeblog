@@ -2,6 +2,7 @@ from django.shortcuts import render , get_object_or_404
 from django.views import generic
 from .models import Posts,UserInfo
 from django import template
+from django.contrib.auth.decorators import login_required
 
 register = template.Library()
 
@@ -34,9 +35,18 @@ class Indexview(generic.ListView):
 #             Top=top
 #     return render(request,'blog/index.html',{'News':News,'Top':Top})
 
-def detailview(request,id,slug):
-    Post = get_object_or_404(Posts,pk=id)
+def detailview(request, id, slug):
+    Post = get_object_or_404(Posts, pk=id)
+    Top4_side = Posts.objects.all().order_by('-likes')[:4]
+
     ManyPosts = Posts.objects.filter(category=Post.category).order_by('-likes')[:4]
-    return render(request,'blog/detail.html',{'Post':Post,'Cat_posts':ManyPosts})
+    return render(request,'blog/detail.html',{'Post':Post,'Cat_posts':ManyPosts,'Top4_side':Top4_side})
 
+@login_required
+def profile(request, id, username):
+    user = UserInfo.objects.get(user__pk=id)
+    Cat_posts = Posts.objects.filter(author=user.user.id)
+    Top4_side = Posts.objects.all().order_by('-likes')[:4]
 
+    print(user)
+    return render(request, 'blog/profile.html', {'USER':user, 'Cat_posts':Cat_posts, 'Top4_side':Top4_side})
