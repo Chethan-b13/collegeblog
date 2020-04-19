@@ -24,6 +24,9 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('accounts/',include('Accounts.urls')),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
+    path('profile/', include('Profile.urls')),
 
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -91,13 +91,20 @@ textarea:focus{ outline-color: #F9B500; }
 
 .card .bg-white{ height: 100%; border-radius: 2px; box-shadow: 1px 1px 20px -10px rgba(0,0,0,.3); }
 
-.card i{ font-size: 1.2em; }
+.card i{ font-size: 1.9em; 
+	
+	/* border: rgb(0, 0, 0); */
+ }
+/* .card i:hover{
+	color: red;
+} */
 
 #author{
 
-	color: midnightblue;
+	color: lightseagreen;
 	font-family: 'BlinkMacSystemFont', 'Segoe UI';
-	margin-left: 50%;
+	margin-left: 19%;
+	font-size: x-small;
 
 }
 
@@ -306,6 +313,9 @@ header .main-menu li.drop-down a.mouseover + ul.drop-down-menu{ display: block;
 
 }
 
+.modal-backdrop{
+	z-index: 0;
+}
 
 
 .author{

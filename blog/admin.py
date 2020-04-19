@@ -6,9 +6,9 @@ class UserInfoAdmin(admin.ModelAdmin):
     list_editable= ('profile_pic','user_link')
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title','slug','likes','status','category','is_hot','post_image')
+    list_display = ('title','slug','status','category','is_hot','post_image')
     prepopulated_fields = {'slug':('title',)}
-    list_editable=('post_image','category','is_hot','likes')
+    list_editable=('post_image','category','is_hot')
 
 admin.site.register(Posts,PostAdmin)
 admin.site.register(Category)

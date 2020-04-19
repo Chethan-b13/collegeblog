@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.urls import reverse
+# from django.urls import reverse
 
 class UserInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -42,7 +42,8 @@ class Posts(models.Model):
     uploaded_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    likes = models.IntegerField(default=0, blank=True,null=True)
+    likes = models.ManyToManyField(User, related_name='likes', blank=True)
+    # is_liked = models.BooleanField(default=False)
     author = models.ForeignKey(UserInfo, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=200)
     post_link = models.URLField(max_length=200, null=True,blank=True)
