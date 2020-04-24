@@ -1,0 +1,10 @@
+{% load liked_extras %}
+
+    <form method="POST" action="{% url 'blog:Like' %}">
+        {% csrf_token %}
+        {% if request.user in condtion.likes.all or is_liked %}
+            <li ><button type="submit" id="like" name='Post_id' value="{{condtion.id}}"><i class="mr-5 font-12 ion-android-favorite" style="color: #fb3958;"></i></button>{{condtion.likes.count}}</li>
+        {% else %}
+            <li ><button type="submit" id="like" name='Post_id' value="{{condtion.id}}"><i class="mr-5 font-12 ion-android-favorite-outline"></i></button>{{condtion.likes.count}}</li>
+        {% endif %}
+    </form>

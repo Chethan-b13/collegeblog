@@ -1,0 +1,105 @@
+{% extends 'Post_create/base.html' %}
+{% block content %}
+
+    <div class="page-wrapper bg-dark p-t-100 p-b-50">
+    
+            <div class="wrapper wrapper--w900">
+                <div class="card card-6">
+                    <div class="card-heading">
+                        <h2 class="title">Create Post</h2>
+                        
+                        <a href="{% url 'blog:home' %}" class="home-btn"><i class="ion-android-home "></i></a>
+
+                    </div>
+            
+                    <div class="card-body">
+
+                        <form action="{% url 'accounts:CreatePost' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="name">{{form.title.label}}</div>
+                                <div class="value ">
+                                    <div class="input--style-6">
+                                        {{form.title}}
+                                    </div>
+
+                                    <!-- <input class="input--style-6" type="text" name="full_name"> -->
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="name">Describe</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <div class="textarea--style-6">
+                                            {{form.desc}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="name">Realted links</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <div class="input--style-6">
+                                            {{form.post_link}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                    <div class="name">Image</div>
+                                    <div class="value">
+                                        <div class="input-group js-input-file">
+                                            
+                                                {{form.post_image}}
+                                            
+                                            <!-- <label class="label--file" for="file">Choose file</label>
+                                            <span class="input-file__info">No file chosen</span>
+                                        </div>
+                                        <div class="label--desc">Your Image is the first thing that is noticed</div> -->
+                                    </div>
+                                </div>
+                            </div>   
+                        
+
+
+                            <div class="form-row">
+                                <div class="name">Category</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        
+                                            {{form.category}}
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="name">Status</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        
+                                            {{form.status}}
+                                    
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <button class="btn btn--radius-2 btn--blue-2" type="submit">Post</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+

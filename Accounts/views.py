@@ -6,9 +6,10 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.utils.encoding import force_bytes, force_text
 from .utils import generate_token
-from django.shortcuts import render, redirect
+from django.views.generic import UpdateView
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from blog.models import UserInfo
+from blog.models import UserInfo, Posts
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from .forms import SignUpForm, PostCreationForm
@@ -121,14 +122,40 @@ def CreatePost(request):
 
         if form.is_valid():
             Post = form.save(commit=False)
-            user= UserInfo.objects.get(user=request.user)
+            user= UserInfo.objects.get(user=request.user.id)
             Post.author = user
             Post.slug = slugify(Post.title)
             Post.save()
-
+            messages.success(request, "Post Created succesfully")
             return redirect(reverse('blog:detail', kwargs={'id':Post.id, 'slug':Post.slug}))
 
     else:
         form = PostCreationForm()
 
-    return render(request, 'accounts/CreatePost.html', {'form':form})    
+    return render(request, 'Post_create/PostCreate.html', {'form':form})    
+
+
+# class PostUpdate(UpdateView):
+#     model = Posts
+#     fields = ['title', 'post_image', 'desc', 'category', 'post_link']
+#     template_name = 'Post_create/PostUpdate.html'
+#     success_url = 'blog:home'
+
+def PostUpdate(request, id):
+    context ={} 
+    obj = get_object_or_404(Posts, id=id)
+    form = PostCreationForm(request.POST, request.FILES, instance=obj)
+
+    if form.is_valid():
+        Post = form.save(commit=False)
+        user= UserInfo.objects.get(user=request.user.id)
+        Post.author = user
+        Post.slug = slugify(Post.title)
+        Post.save()
+        messages.success(request, "Post Updated succesfully")
+        return redirect(reverse('blog:detail', kwargs={'id':obj.id, 'slug':obj.slug}))
+    
+    context['form'] = PostCreationForm( instance=obj)
+    
+    return render(request, 'Post_create/PostUpdate.html', context)    
+    

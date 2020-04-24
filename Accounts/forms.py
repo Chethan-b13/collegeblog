@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from blog.models import Posts
+from blog.models import Posts, Comment
 from django.contrib.auth.forms import UserCreationForm 
 
 class SignUpForm(UserCreationForm):
@@ -48,8 +48,41 @@ class SignUpForm(UserCreationForm):
 
 class PostCreationForm(forms.ModelForm):
 
+    title = forms.CharField(label='Title', widget=forms.TextInput(
+        attrs={
+            'style':   'margin:0; border:none; width=100%;',
+            'placeholder': 'Be specific and clear',
+            
+        }
+    ))
+
+    desc = forms.CharField(widget=forms.Textarea(
+        attrs={
+            'style':   'margin:0; border:none; width=100%;',
+            'placeholder': 'Describe your post',          
+        }
+    ))
+
+    post_link = forms.URLField(max_length=250, required=False, widget=forms.TextInput(
+        attrs={
+            'style': 'margin:0; border:none; width=100%;',
+            'placeholder': 'Any post related Links'
+        }
+    ))
+
     class Meta:
         model = Posts
         fields = ('title', 'post_image', 'desc', 'category', 'post_link', 'status')
 
 
+class CommentForm(forms.ModelForm):
+    content = forms.CharField(widget=forms.Textarea(
+        attrs={
+            'rows':'4' ,
+            'cols':'20',
+            'placeholder': 'Write Your comments here',          
+        }
+    ))
+    class Meta:
+        model= Comment
+        fields = ('content',)

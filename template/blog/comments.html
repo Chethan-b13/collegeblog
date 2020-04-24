@@ -1,0 +1,94 @@
+<h4 class="mb-30 mt-20 clearfix" id='comment'><b>Comments</b></h4>
+						
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
+        <form method="POST" class="Comment-form form-block form-h-55 form-plr-20 form-bg-white" action=".">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-sm-12 mb-30" aria-rowcount="8" aria-colcount="25">
+                    {{comment_form.content}}
+                </div><!-- col-sm-12-->
+                
+            </div><!-- row-->
+            {% if request.user.is_authenticated %}
+                <button class="btn-b-lg btn-brdr-primary plr-25 color-black" type="submit"><b>Post Comment</b></button>
+            {% else %}
+                <button class="btn-b-lg btn-brdr-grey plr-25 color-ash" type="submit" disabled><b>Post Comment</b></button>
+            {% endif %}
+        </form>
+    </div><!-- col-sm-6-->	
+</div><!-- row-->	
+
+
+<h4 class="mb-30 mt-50 clearfix"><b>Comment{{Comments|pluralize}}({{Comments.count}})</b></h4>
+
+{% for Comment in Comments%}
+<div class="row">
+    <div class="colsm-12 col-md-12 col-lg-12 col-xl-8">
+        <div class="p-30 bg-white">
+            <div class="row">
+                <div class="col-9 col-lg-9 col-xl-6">
+                    
+                    <div class="sided-70x">
+                        <div class="s-left">
+                            {% if Comment.user.useinfo.profile_pic %}
+                                <img src="/media/{{Comment.user.useinfo.profile_pic}}" alt="">
+                            {% else %}
+                                <img src="/media/profile_pics/def.png" alt="">
+                            {% endif %}
+                        </div><!-- s-left-->
+                        
+                        <div class="s-right">
+                            <p class="ptb-5 color-ash"><b>{{Comment.user.username | capfirst}} on {{Comment.timestamp}}</b></p>
+                        </div>
+                    </div><!-- sided-80x-->
+                </div><!-- col-md-6-->
+                
+                <div class="col-3 col-lg-3 col-xl-6 text-right">
+                    <!-- <a class="color-ash" href="#"><b>REPLY</b></a> -->
+                    <button type="button" name="button" class="reply-btn color-ash"><b>REPLY</b></button>
+                </div><!-- col-md-6-->
+            </div><!-- row-->
+
+            <p class="mt-30">{{Comment.content}}</p>
+            <!-- for replied comments -->
+                <div class="row" >
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
+                        {% if Comment.reply %}
+                            <h5 class="clearfix mt-20"><b>Replies({{Comment.reply.all.count}}):</b></h5>
+                            <div class="ml-50">
+                                {% for reply in Comment.reply.all %}
+                                    <div class="s-right ">
+                                        <p class="ptb-5 color-ash"><b>{{reply.user.username | capfirst}}</b></p>
+                                    </div>
+                                    <p >{{reply.content}}</p><hr>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        
+                    </div><!-- col-sm-6-->	
+                </div><!-- row-->
+                <!-- end replied comments  -->
+                <div class="replied-comments" style="display: none;">
+
+                    <form method="POST" class="reply-form form-block form-h-55 form-plr-20 form-bg-white" action=".">
+                        {% csrf_token %}
+                        <input type="hidden" name='comment_id' value="{{Comment.id}}">
+                        <div class="row">
+                            <div class="col-sm-12 mb-30">
+                                {{comment_form.content}}
+                            </div><!-- col-sm-12-->
+                            
+                        </div><!-- row-->
+                        {% if request.user.is_authenticated %}
+                            <button class="btn-b-lg btn-brdr-primary plr-25 color-black" type="submit"><b>Reply</b></button>
+                        {% else %}
+                            <button class="btn-b-lg btn-brdr-grey plr-25 color-ash" type="submit" disabled><b>Reply</b></button>
+                        {% endif %}
+                    </form>
+
+                </div>
+        </div><!-- p-30-->	
+    </div><!-- col-sm-6-->	
+</div><!-- row-->	<hr>
+{% endfor %}
