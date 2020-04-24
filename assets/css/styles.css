@@ -535,9 +535,13 @@ header .main-menu li.drop-down a.mouseover + ul.drop-down-menu{ display: block;
 
 /* BUTTON STYLING */
 
-.btn-brdr-primary{ text-align: center; height: 45px; line-height: 43px; border: 1px solid #F9B500; color: #F9B500; 
+.btn-brdr-primary{ text-align: center; height: 45px; line-height: 43px; border: 1px solid #000; color: #F9B500; 
 	border-radius: 2px; }
 .btn-brdr-primary:hover{ background: #F9B500; color: #000; }
+
+.btn-brdr-black{ text-align: center; height: 45px; line-height: 43px; border: 1px solid #F9B500; color: #000; 
+	border-radius: 2px; }
+.btn-brdr-black:hover{ background: #F9B500; color: #000; }
 
 .btn-brdr-grey{ text-align: center; height: 45px; line-height: 43px; border: 1px solid #ccc;
 	border-radius: 2px; }

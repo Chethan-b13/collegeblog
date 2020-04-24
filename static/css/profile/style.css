@@ -218,7 +218,20 @@ ol {
 	margin-bottom: 0;
 }
 
+.publish{
+	width: fit-content;
+	background-color: #808181;
+	color: rgb(255, 255, 255);
+	width: 55px;
+	border-radius: 13px;
+	text-align: center;
+	bottom: 52%;
+	position: absolute;
+}
 
+.publish:hover{
+
+}
 
 
 .img-circle figure img{

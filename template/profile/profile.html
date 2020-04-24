@@ -15,6 +15,12 @@
 			</div><!-- dplay-tbl -->
 		</div><!-- container -->
 	</div><!-- slider-main -->
+
+	
+
+	{% include 'alerts.html' %}
+
+	
 	
 
     
@@ -71,80 +77,96 @@
 					<div class="col-md-12 col-lg-8 ptb-50 pr-30 pr-md-15">
 						<div class="mt-50 mb-20">
 							{% if USER.user.username == request.user.username %}
-							<h2 style="font-family: 'Josefin Sans'" class="mb-30 mt-20 clearfix text-center"><b>My Posts</b></h2><hr>
+							<h2 style="font-family: 'Josefin Sans'" class="mb-30 mt-20 clearfix text-center"><b>My Posts <a href="{% url 'accounts:CreatePost' %}" style="float: right;"><i class="ion-android-add-circle"></i></a></b></h2><hr>
 							{% else %}
 							<h2 style="font-family: 'Josefin Sans'" class="mb-30 mt-20 clearfix text-center"><b>User Post</b></h2><hr>
 							{% endif %}
 							<div class="row">
 
-								
-								{% for CatPost in Cat_posts %}
-								<!-- {% if CatPost.id != Post.id%} -->
-								
-									<div class=" col-sm-6 col-md-6 col-lg-6 col-xl-4 mb-30 ">
-										<div class="card h-100 min-h-350x">
-											<div class="bg-white h-100 zoom">
-												<!-- SETTING IMAGE WITH bg-10 -->
-												
-												<div class="h-50 " style="background: url('/media/{{CatPost.post_image}}') no-repeat center; background-size: cover; "></div>
-												<a href="{% url 'blog:detail' CatPost.id CatPost.slug %}" style="display: block;">
-												
-												<div class="plr-25 ptb-15 h-50">
-													<div class="dplay-tbl">
-														<div class="dplay-tbl-cell">
-														
-															<h5 class="color-ash"><b>{{CatPost.category}}</b></h5>
-															<h4 class="mtb-10">
-																<a href="{% url 'blog:detail' CatPost.id CatPost.slug %}"><b>{{CatPost.title}}</b></a></h4>
-															<ul class="list-li-mr-10" style="color: rgb(167, 167, 167);">
-																<li><button><i class="mr-5 font-12 ion-android-favorite"></i>{{CatPost.likes.count}}</button></li>
-																<li><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li>
-
-																{% if USER.user.username == request.user.username %}
-																<div style="float: right; font-size:large;">
-																	<li><button type="button" data-toggle="modal" data-target="#exampleModalCenter"><i class="mr-5 font-12 ion-android-delete" style="color: rgb(255, 112, 112);"></i></button></li>
-																	<span></span>
-																	<li><a href=""><i class="mr-5 font-12 ion-edit"></i></a></li>
-																</div>																	
-																{% endif %}
-															</ul>
+								{% if  Cat_posts %}
+									{% for CatPost in Cat_posts %}
+									<!-- {% if CatPost.id != Post.id%} -->
+									
+										<div class=" col-sm-6 col-md-6 col-lg-6 col-xl-4 mb-30 ">
+											<div class="card h-100 min-h-350x">
+												<div class="bg-white h-100 zoom">
+													<!-- SETTING IMAGE WITH bg-10 -->
+													
+													<div class="h-50 " style="background: url('/media/{{CatPost.post_image}}') no-repeat center; background-size: cover; ">
+														{% if CatPost.status == 'Draft' %}
+															<a href="" class="ml-10 publish ">Draft</a>
+														{% endif %}
+													</div>
+													<a href="{% url 'blog:detail' CatPost.id CatPost.slug %}" style="display: block;">
+													
+													<div class="plr-25 ptb-15 h-50">
+														<div class="dplay-tbl">
+															<div class="dplay-tbl-cell">
 															
-														</div><!-- dplay-tbl-cell -->
-													</div><!-- dplay-tbl -->
-												</div><!-- plr-25 ptb-15 -->
-											</a>
-											</div><!-- hot-news -->
-										</div><!-- card -->
-									</div> 
-								
-								<!-- {% endif %} -->
-									<!-- modal confirm delete -->
-									<!-- Modal -->
-									<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered" role="document">
-										  <div class="modal-content">
-											<div class="modal-header">
-											  <h5 class="modal-title" id="exampleModalLongTitle">Confirmation</h5>
-											  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											  </button>
+																<h5 class="color-ash"><b>{{CatPost.category}}</b>
+																		
+																</h5>
+																
+																<h4 class="mtb-10">
+																	<a href="{% url 'blog:detail' CatPost.id CatPost.slug %}"><b>{{CatPost.title | truncatechars:18 }}</b></a></h4>
+																<ul class="list-li-mr-10">
+																	{% include 'blog/like.html' with condtion=CatPost Val=CatPost.id  CountLike=CatPost.likes.count %}
+																	<span></span>
+																	<!-- <li><button><i class="mr-5 font-12 ion-android-favorite-outline"></i>{{CatPost.likes.count}}</button></li> -->
+																	<li><a href="{% url 'blog:detail' CatPost.id CatPost.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</a></li>
+
+																	{% if USER.user.username == request.user.username %}
+																		<div style="float: right;">
+																			<li><button type="button" data-toggle="modal" data-target="#exampleModalCenter{{CatPost.id}}" class="deletebtn" value="{{CatPost.id}}"><i class="mr-5 font-12 ion-android-delete" style="color: rgb(255, 112, 112);"></i></button></li>
+																			<span></span>
+																			<li><a href="{% url 'accounts:PostUpdate' CatPost.id %}"><i class="mr-5 font-12 ion-edit"></i></a></li>
+																		</div>	
+																	{% endif %}
+																</ul>
+															</div><!-- dplay-tbl-cell -->
+														</div><!-- dplay-tbl -->
+													</div><!-- plr-25 ptb-15 -->
+												</a>
+												</div><!-- hot-news -->
+											</div><!-- card -->
+										</div> 
+									
+									<!-- {% endif %} -->
+										<!-- modal confirm delete -->
+										<!-- Modal -->
+										<div class="modal fade" id="exampleModalCenter{{CatPost.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLongTitle">Confirmation</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+												</div>
+												<div class="modal-body">
+												Do you really want to delete "{{CatPost.title}}"
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+												<form action="{% url 'Profile:PostDelete' CatPost.id %}" method="POST">
+													{% csrf_token %}
+														<button type="submit" class="btn btn-danger">Confirm</button>
+												</form>
+												</div>
 											</div>
-											<div class="modal-body">
-											  Do you really want to delete "{{CatPost.title}}"
 											</div>
-											<div class="modal-footer">
-											  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-											  <form action="{% url 'Profile:PostDelete' CatPost.id %}" method="POST">
-												  {% csrf_token %}
-													<button type="submit" class="btn btn-danger">Confirm</button>
-											  </form>
-											</div>
-										  </div>
 										</div>
-									  </div>
+										
 
-								{% endfor %}
+									{% endfor %}
 
+								{% else %}
+								<div class="col mb-30 mt-20 clearfix text-center">
+									<a href="" class="btn btn-success btn-lg">Add Post</a>
+								</div>			
+								{% endif %}
+
+								
 
 							</div><!-- row-->	
 						</div><!-- mt-50 mb-20-->	
