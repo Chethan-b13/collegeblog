@@ -1,6 +1,6 @@
 {% extends 'blog/base.html' %}
 {% load static %}
-	
+{% load liked_extras %}
 {% block content %}
 
 	<div class="slider-main h-500x h-sm-auto pos-relative pt-95 pb-25">
@@ -110,10 +110,12 @@
 																<h4 class="mtb-10">
 																	<a href="{% url 'blog:detail' CatPost.id CatPost.slug %}"><b>{{CatPost.title | truncatechars:18 }}</b></a></h4>
 																<ul class="list-li-mr-10">
-																	{% include 'blog/like.html' with condtion=CatPost Val=CatPost.id  CountLike=CatPost.likes.count %}
+																	<div class="like-section{{CatPost.id}}">
+																		{% include 'blog/like.html' with condtion=CatPost %}
+																	</div>
 																	<span></span>
 																	<!-- <li><button><i class="mr-5 font-12 ion-android-favorite-outline"></i>{{CatPost.likes.count}}</button></li> -->
-																	<li><a href="{% url 'blog:detail' CatPost.id CatPost.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</a></li>
+																	<li><a href="{% url 'blog:detail' CatPost.id CatPost.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{CatPost|Comment_count}}</a></li>
 
 																	{% if USER.user.username == request.user.username %}
 																		<div style="float: right;">

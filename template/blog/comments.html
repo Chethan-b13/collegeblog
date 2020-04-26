@@ -1,11 +1,12 @@
 <h4 class="mb-30 mt-20 clearfix" id='comment'><b>Comments</b></h4>
 						
 <div class="row">
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
+    <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-8">
         <form method="POST" class="Comment-form form-block form-h-55 form-plr-20 form-bg-white" action=".">
+            {% include 'alerts.html' %}
             {% csrf_token %}
             <div class="row">
-                <div class="col-sm-12 mb-30" aria-rowcount="8" aria-colcount="25">
+                <div class="textarea col-sm-12 mb-30" aria-rowcount="8" aria-colcount="25">
                     {{comment_form.content}}
                 </div><!-- col-sm-12-->
                 
@@ -40,6 +41,14 @@
                         
                         <div class="s-right">
                             <p class="ptb-5 color-ash"><b>{{Comment.user.username | capfirst}} on {{Comment.timestamp}}</b></p>
+                            {% if Comment.user.id == request.user.id  or Comment.Post.author.id == request.user.id %}
+                                <div>
+                                    <form action="{% url 'blog:DeleteComment' Comment.id %}" method="post" class="comment-delete-section">
+                                        {% csrf_token %}
+                                        <button type="submit" name="comment-delete" class="comment-delete-btn" value="{{Comment.id}}"><i class="mr-5 font-12 ion-android-delete" style="color: rgb(255, 112, 112);"></i></button>
+                                    </form>
+                                </div>	
+							{% endif %}
                         </div>
                     </div><!-- sided-80x-->
                 </div><!-- col-md-6-->
@@ -60,6 +69,17 @@
                                 {% for reply in Comment.reply.all %}
                                     <div class="s-right ">
                                         <p class="ptb-5 color-ash"><b>{{reply.user.username | capfirst}}</b></p>
+                                        {% if reply.user.id == request.user.id or reply.Post.author.id == request.user.id %}
+                                            
+                                            <div style="float: right;" >
+                                                <form action="{% url 'blog:DeleteComment' reply.id %}" method="post" class="comment-delete-section">
+                                                    {% csrf_token %}
+                                                    <button type="submit" name="comment-delete" class="comment-delete-btn" value="{{reply.id}}"><i class="mr-5 font-12 ion-android-delete" style="color: rgb(255, 112, 112);"></i></button>
+                                                </form>
+                                            </div>
+                                            
+                                                	
+										{% endif %}
                                     </div>
                                     <p >{{reply.content}}</p><hr>
                                 {% endfor %}
@@ -69,13 +89,14 @@
                     </div><!-- col-sm-6-->	
                 </div><!-- row-->
                 <!-- end replied comments  -->
-                <div class="replied-comments" style="display: none;">
+                <div class="replied-comments mt-10" style="display: none;">
 
                     <form method="POST" class="reply-form form-block form-h-55 form-plr-20 form-bg-white" action=".">
+                        
                         {% csrf_token %}
                         <input type="hidden" name='comment_id' value="{{Comment.id}}">
                         <div class="row">
-                            <div class="col-sm-12 mb-30">
+                            <div class="textarea col-sm-12 mb-30">
                                 {{comment_form.content}}
                             </div><!-- col-sm-12-->
                             

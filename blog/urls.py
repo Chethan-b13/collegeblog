@@ -7,4 +7,6 @@ urlpatterns = [
     path('', views.Indexview.as_view(), name='home'),
     path('blog/<int:id>/<slug:slug>/', views.detailview, name='detail'),
     path('likes/', views.PostLike, name='Like'),
+    path('<int:id>/DeleteComment/', views.CommentDelete, name='DeleteComment'),
+
 ]

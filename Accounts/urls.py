@@ -11,7 +11,6 @@ urlpatterns = [
     path('logout/', views.Logout, name='logout'),
     path('activate/<uidb64>/<token>', views.ActivateAccount.as_view(), name='activate'),
     path('CreatePost/', views.CreatePost, name='CreatePost'),
-    path('<int:id>/PostUpdate/', views.PostUpdate, name='PostUpdate')
-
+    path('<int:id>/PostUpdate/', views.PostUpdate, name='PostUpdate'),
     #url for OAuth(social logins)
 ]

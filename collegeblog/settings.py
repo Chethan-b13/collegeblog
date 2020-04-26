@@ -49,8 +49,32 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django',
+    'ckeditor',
+    'tinymce',
     
 ]
+
+CKEDITOR_UPLOAD_PATH = "editorUplods/"
+
+CKEDITOR_CONFIGS = {
+    'default':{
+        'toolbar':'Custom',
+        'width':'revert',
+        'margin':None,
+        'height': 175,
+        'toolbar_Custom':[
+            # ['Bold', 'Italic', 'Underline', 'StrikeThrough',
+            # 'Link', 'Smiley', 'TextColor', 'IFrame',
+            # 'Table' 
+            # ]
+            ["Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker",'TextColor'],
+                ['NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter',
+                 'JustifyRight', 'JustifyBlock'],
+                ["Image", "Table", "Link", "Smiley"], ['Undo', 'Redo'],
+                ["Maximize"]
+        ],
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

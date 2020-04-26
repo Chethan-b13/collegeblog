@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from blog.models import Posts, Comment
 from django.contrib.auth.forms import UserCreationForm 
+from ckeditor.fields import RichTextFormField
+from ckeditor.widgets import CKEditorWidget
 
 class SignUpForm(UserCreationForm):
     username = forms.CharField( max_length=25, widget=forms.TextInput( attrs={
@@ -56,17 +58,17 @@ class PostCreationForm(forms.ModelForm):
         }
     ))
 
-    desc = forms.CharField(widget=forms.Textarea(
-        attrs={
-            'style':   'margin:0; border:none; width=100%;',
-            'placeholder': 'Describe your post',          
-        }
+    desc = forms.CharField(widget=CKEditorWidget(
+        # attrs={
+        #     'style': 'margin:0; border:none; width=100%;',
+        #     'placeholder': 'Any post related Links'
+        # }
     ))
 
     post_link = forms.URLField(max_length=250, required=False, widget=forms.TextInput(
         attrs={
             'style': 'margin:0; border:none; width=100%;',
-            'placeholder': 'Any post related Links'
+            'placeholder': 'Any post related Links  **It Can be blank'
         }
     ))
 
@@ -76,11 +78,12 @@ class PostCreationForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-    content = forms.CharField(widget=forms.Textarea(
+    content = forms.CharField(required=False,widget=forms.Textarea(
         attrs={
-            'rows':'4' ,
-            'cols':'20',
-            'placeholder': 'Write Your comments here',          
+            'class': 'comment-area',
+            'rows': '4',
+            'cols': '20',
+            'placeholder': 'Write Your comments here',
         }
     ))
     class Meta:
