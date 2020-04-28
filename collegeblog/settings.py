@@ -124,10 +124,11 @@ WSGI_APPLICATION = 'collegeblog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db name',
-        'USER' : 'your db username ',
-        'PASSWORD': 'your db pass' ,
-        'HOST': 'your host',
+        'NAME': 'chethsblog',
+        'USER' : 'cheths',
+        'PASSWORD': <passowrd>,
+        'HOST': 'localhost',
+
     }
 }
 
@@ -180,9 +181,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 
 LOGIN_REDIRECT_URL = 'blog:home'
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '<google key>'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '<google secret>'
-SOCIAL_AUTH_FACEBOOK_KEY = '<fb key>'
-SOCIAL_AUTH_FACEBOOK_SECRET = '<fb secret>'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = <key>
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = <secret>
+SOCIAL_AUTH_FACEBOOK_KEY = <fb auth kkey>
+SOCIAL_AUTH_FACEBOOK_SECRET = <fb secret>
+
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.10'
