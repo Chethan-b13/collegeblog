@@ -25,6 +25,7 @@ urlpatterns = [
     path('accounts/',include('Accounts.urls')),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
     path('profile/', include('Profile.urls')),
+    path('tinymce/', include('tinymce.urls')),
 
 ]
 

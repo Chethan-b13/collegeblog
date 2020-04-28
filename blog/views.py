@@ -2,12 +2,12 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import JsonResponse
 from django.db.models import Count
 from django.contrib.auth.models import User
+from django.contrib import messages
 from django.template.loader import render_to_string
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import Posts, Comment
 from Accounts.forms import CommentForm
-
 
 class Indexview(generic.ListView):
     template_name = 'blog/index.html'
@@ -70,6 +70,8 @@ def detailview(request, id, slug):
             content.user = User.objects.get(id=request.user.id)
             content.Post = Posts.objects.get(id=Post.id)
             content.save()
+            comment_form = CommentForm()
+            
     else:
         comment_form = CommentForm()
 
@@ -82,8 +84,25 @@ def detailview(request, id, slug):
     }
 
     if request.is_ajax():
+        messages.success(request,"Comment Posted !")
         html = render_to_string('blog/comments.html', context, request=request)
         return JsonResponse({'form': html})
 
 
     return render(request, 'blog/detail.html', context)
+
+
+@login_required
+def CommentDelete(request, id):
+    comment = get_object_or_404(Comment,id=id)
+    post = comment.Post
+    comment.delete()
+    comments = Comment.objects.filter(Post=post.id, Reply=None).order_by('-id')
+    context = {
+        'Comments':comments,
+        'comment_form' : CommentForm()
+    }
+
+    if request.is_ajax():
+        html = render_to_string('blog/comments.html', context, request=request)
+        return JsonResponse({'form': html})

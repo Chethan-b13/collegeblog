@@ -54,17 +54,8 @@
 																{% include 'blog/like.html' with condtion=Hot %}
 															</div>
 															
-
-															<!-- <form action="{% url 'blog:Like' %}" method="POST">
-																{% csrf_token %}
-																	{% if Hot|liked:request.user.id %}
-																		<li id="like-section"><button type="submit" name='Post_id' value="{{Hot.id}}"><i class="mr-5 font-12 ion-android-favorite" style="color: #fb3958;"></i></button>{{Hot.likes.count}}</li>
-																	{% else %}
-																		<li id="like-section"><button type="submit" name='Post_id' value="{{Hot.id}}"><i class="mr-5 font-12 ion-android-favorite-outline"></i></button>{{Hot.likes.count}}</li>
-																	{% endif %}	
-															</form> -->
 															<span></span>
-																<li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li>
+																<li style="float: right;"><a href="{% url 'blog:detail' Hot.id Hot.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{Hot|Comment_count}}</a></li>
 														</ul>
 													</div><!-- hot-news -->
 												</div><!-- hot-news -->
@@ -106,16 +97,8 @@
 										<div class="like-section{{article.id}}">
 											{% include 'blog/like.html' with condtion=article %}
 										</div>
-
-										<!-- <form action="{% url 'blog:Like' %}" method="POST">
-											{% csrf_token %}
-											{% if article|liked:request.user.id %}
-												<li id="like-section"><button type="submit" name='Post_id' value="{{article.id}}"><i class="mr-5 font-12 ion-android-favorite" style="color: #fb3958;"></i></button>{{article.likes.count}}</li>
-											{% else %}
-											<li id="like-section"><button type="submit" name='Post_id' value="{{article.id}}"><i class="mr-5 font-12 ion-android-favorite-outline"></i></button>{{article.likes.count}}</li>
-											{% endif %}
-										</form> -->
-										<li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li>
+										<li style="float: right;"><a href="{% url 'blog:detail' article.id article.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{article|Comment_count}}</a></li>
+										<!-- <li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
 									</ul>	
 								</div><!-- hot-news -->
 							</div><!-- card -->
@@ -143,23 +126,14 @@
 							<div class="card h-100 pos-relative bg-4 bg-layer-4 color-white" style="background: url('/media/{{art.post_image}}'); background-position: center; background-size: cover;">
 								<div class="plr-25 ptb-15">
 									<h5 class="color-grey"><b>{{art.category}}</b></h5>
-									<h4 class="mtb-10"><a href="{% url 'blog:detail' art.id art.slug %}"><b>{{art.title}}</b></a></h4>
+									<h4 class="mtb-10"><a href="{% url 'blog:detail' art.id art.slug %}"><b>{{art.title }}</b></a></h4>
 									<ul class="list-li-mr-10 color-grey">
 
 										<div class="like-section{{art.id}}">
 											{% include 'blog/like.html' with condtion=art %}
 										</div>
-
-										<!-- <form action="{% url 'blog:Like' %}" method="POST">
-											{% csrf_token %}
-											{% if  art|liked:request.user.id %}
-												<li id="like-section"><button type="submit" name='Post_id' value="{{art.id}}"><i class="mr-5 font-12 ion-android-favorite" style="color: #fb3958;"></i></button>{{art.likes.count}}</li>
-											{% else %}
-												<li id="like-section"><button type="submit" name='Post_id' value="{{art.id}}"><i class="mr-5 font-12 ion-android-favorite-outline"></i></button>{{art.likes.count}}</li>
-											{% endif %}
-										</form> -->
-
-										<li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li>
+										<li style="float: right;"><a href="{% url 'blog:detail' art.id art.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{art|Comment_count}}</a></li>
+										<!-- <li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
 									</ul>
 								</div><!-- hot-news -->
 							</div><!-- card -->
@@ -254,17 +228,10 @@
 												<div class="like-section{{Top.0.id}}">
 													{% include 'blog/like.html' with condtion=Top.0   %}
 												</div>
-
-												<!-- <form action="{% url 'blog:Like' %}" method="POST">
-													{% csrf_token %}
-													{% if  Top.1|liked:request.user.id %}
-														<li id="like-section"><button type="submit" name='Post_id' value="{{Top.1.id}}"><i class="mr-5 font-12 ion-android-favorite" style="color: #fb3958;"></i></button>{{Top.1.likes.count}}</li>
-													{% else %}
-														<li id="like-section"><button type="submit" name='Post_id' value="{{Top.1.id}}"><i class="mr-5 font-12 ion-android-favorite-outline"></i></button>{{Top.1.likes.count}}</li>
-													{% endif %}
-												</form> -->
 												
-												<li><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li>
+												<li style="float: right;"><a href="{% url 'blog:detail' Top.0.id Top.0.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{Top.0|Comment_count}}</a></li>
+												
+												<!-- <li><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
 											</ul>
 										</div><!-- dplay-tbl-cell -->
 									</div><!-- dplay-tbl -->
@@ -295,19 +262,9 @@
 															{% include 'blog/like.html' with condtion=Top.1   %}
 														</div>
 
+														<li style="float: right;"><a href="{% url 'blog:detail' Top.1.id Top.1.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{Top.1|Comment_count}}</a></li>
 
-
-
-														<!-- <form action="{% url 'blog:Like' %}" method="POST">
-															{% csrf_token %}
-															{% if Top.6|liked:request.user.id %}
-																<li id="like-section"><button type="submit" name='Post_id' value="{{Top.6.id}}"><i class="mr-5 font-12 ion-android-favorite" style="color: #fb3958;"></i></button>{{Top.6.likes.count}}</li>
-															{% else %}
-																<li id="like-section"><button type="submit" name='Post_id' value="{{Top.6.id}}"><i class="mr-5 font-12 ion-android-favorite-outline"></i></button>{{Top.6.likes.count}}</li>
-															{% endif %}
-															
-														</form> -->
-														<li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li>
+														<!-- <li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
 													</ul>
 													
 												</div><!-- dplay-tbl-cell -->
@@ -327,24 +284,16 @@
 											<div class="dplay-tbl-cell">
 											
 												<h5 class="color-grey"><b>{{Top.2.category}}</b></h5>
-												<h4 class="mtb-10"><a href="{% url 'blog:detail' Top.2.id Top.2.slug %}"><b>{{Top.2.title}}</b></a></h4>
+												<h4 class="mtb-10"><a href="{% url 'blog:detail' Top.2.id Top.2.slug %}"><b>{{Top.2.title| truncatechars:25}}</b></a></h4>
 												<ul class="list-li-mr-10 color-white">
 
 
 													<div class="like-section{{Top.2.id}}">
 														{% include 'blog/like.html' with condtion=Top.2   %}
 													</div>
+													<li style="float: right;"><a href="{% url 'blog:detail' Top.2.id Top.2.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{Top.2|Comment_count}}</a></li>
 
-													<!-- <form action="{% url 'blog:Like' %}" method="POST">
-														  {% csrf_token %}
-														{% if Top.2|liked:request.user.id %}
-															<li id="like-section"><button type="submit" name='Post_id' value="{{Top.2.id}}"><i class="mr-5 font-12 ion-android-favorite" style="color: #fb3958;"></i></button>{{Top.2.likes.count}}</li>
-														{% else %}
-															<li id="like-section"><button type="submit" name='Post_id' value="{{Top.2.id}}"><i class="mr-5 font-12 ion-android-favorite-outline"></i></button>{{Top.2.likes.count}}</li>
-														{% endif %}
-													</form> -->
-
-													<li><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li>
+													<!-- <li><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
 												</ul>
 												
 											</div><!-- dplay-tbl-cell -->
@@ -360,21 +309,15 @@
 											<div class="dplay-tbl-cell">
 											
 												<h5 class="color-grey"><b>{{Top.3.category}}</b></h5>
-												<h4 class="mtb-10"><a href="{% url 'blog:detail' Top.3.id Top.3.slug %}"><b>{{Top.3.title}}</b></a></h4>
+												<h4 class="mtb-10"><a href="{% url 'blog:detail' Top.3.id Top.3.slug %}"><b>{{Top.3.title| truncatechars:25}}</b></a></h4>
 												<ul class="list-li-mr-10 color-white">
 													
 													<div class="like-section{{Top.3.id}}">
 														{% include 'blog/like.html' with condtion=Top.3   %}
 													</div>
-													<!-- <form action="{% url 'blog:Like' %}" method="POST">
-														{% csrf_token %}
-														{% if Top.3|liked:request.user.id %}
-															<li><button type="submit" name='Post_id' value="{{Top.3.id}}"><i class="mr-5 font-12 ion-android-favorite" style="color: #fb3958;"></i></button>{{Top.3.likes.count}}</li>
-														{% else %}
-															<li ><button type="submit" name='Post_id' value="{{Top.3.id}}"><i class="mr-5 font-12 ion-android-favorite-outline"></i></button>{{Top.3.likes.count}}</li>
-														{% endif %}
-													</form> -->
-													<li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li>
+													<li style="float: right;"><a href="{% url 'blog:detail' Top.3.id Top.3.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{Top.3|Comment_count}}</a></li>
+													
+													<!-- <li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
 												</ul>
 												
 											</div><!-- dplay-tbl-cell -->
@@ -395,22 +338,15 @@
 										
 											<h5 class="color-grey"><b>{{Top.4.category}}</b></h5>
 											<h2 class="mtb-10"><a href="{% url 'blog:detail' Top.4.id Top.4.slug %}">
-												<b>{{Top.4.title}}</b></a></h2>
+												<b>{{Top.4.title| truncatechars:40}}</b></a></h2>
 											<ul class="list-li-mr-10 color-grey">
 
 												<div class="like-section{{Top.4.id}}">
 													{% include 'blog/like.html' with condtion=Top.4   %}
 												</div>
+												<li style="float: right;"><a href="{% url 'blog:detail' Top.4.id Top.4.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{Top.4|Comment_count}}</a></li>
 
-												<!-- <form action="{% url 'blog:Like' %}" method="POST">
-													{% csrf_token %}
-													{% if Top.4|liked:request.user.id %}
-														<li id="like-section"><button type="submit" name='Post_id' value="{{Top.4.id}}"><i class="mr-5 font-12 ion-android-favorite" style="color: #fb3958;"></i></button>{{Top.4.likes.count}}</li>
-													{% else %}
-														<li ><button type="submit" name='Post_id' value="{{Top.4.id}}"><i class="mr-5 font-12 ion-android-favorite-outline"></i></button>{{Top.4.likes.count}}</li>
-													{% endif %}
-												</form> -->
-												<li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li>
+												<!-- <li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
 											</ul>
 											
 										</div><!-- dplay-tbl-cell -->
@@ -433,23 +369,15 @@
 											
 												<h5 class="color-ash"><b>{{Top.5.category}}</b></h5>
 												<h4 class="mtb-10">
-													<a href="{% url 'blog:detail' Top.5.id Top.5.slug %}"><b>{{Top.5.title}}</b></a></h4>
+													<a href="{% url 'blog:detail' Top.5.id Top.5.slug %}"><b>{{Top.5.title| truncatechars:25}}</b></a></h4>
 												<ul class="list-li-mr-10 color-lt-black">
 
 													<div class="like-section{{Top.5.id}}">
 														{% include 'blog/like.html' with condtion=Top.5   %}
 													</div>
+													<li style="float: right;"><a href="{% url 'blog:detail' Top.5.id Top.5.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{Top.5|Comment_count}}</a></li>
 
-													<!-- <form action="{% url 'blog:Like' %}" method="POST">
-														{% csrf_token %}
-														{% if Top.5|liked:request.user.id %}
-															<li id="like-section"><button type="submit" name='Post_id' value="{{Top.5.id}}"><i class="mr-5 font-12 ion-android-favorite" style="color: #fb3958;"></i></button>{{Top.5.likes.count}}</li>
-														{% else %}
-															<li id="like-section"><button type="submit" name='Post_id' value="{{Top.5.id}}"><i class="mr-5 font-12 ion-android-favorite-outline"></i></button>{{Top.5.likes.count}}</li>
-														{% endif %}
-														
-													</form> -->
-													<li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li>
+													<!-- <li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
 												</ul>
 												
 											</div><!-- dplay-tbl-cell -->

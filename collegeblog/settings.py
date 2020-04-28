@@ -49,8 +49,32 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django',
+    'ckeditor',
+    'tinymce',
     
 ]
+
+CKEDITOR_UPLOAD_PATH = "editorUplods/"
+
+CKEDITOR_CONFIGS = {
+    'default':{
+        'toolbar':'Custom',
+        'width':'revert',
+        'margin':None,
+        'height': 175,
+        'toolbar_Custom':[
+            # ['Bold', 'Italic', 'Underline', 'StrikeThrough',
+            # 'Link', 'Smiley', 'TextColor', 'IFrame',
+            # 'Table' 
+            # ]
+            ["Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker",'TextColor'],
+                ['NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter',
+                 'JustifyRight', 'JustifyBlock'],
+                ["Image", "Table", "Link", "Smiley"], ['Undo', 'Redo'],
+                ["Maximize"]
+        ],
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -104,6 +128,7 @@ DATABASES = {
         'USER' : 'cheths',
         'PASSWORD': <passowrd>,
         'HOST': 'localhost',
+
     }
 }
 
@@ -156,9 +181,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 
 LOGIN_REDIRECT_URL = 'blog:home'
+
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = <key>
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = <secret>
 SOCIAL_AUTH_FACEBOOK_KEY = <fb auth kkey>
 SOCIAL_AUTH_FACEBOOK_SECRET = <fb secret>
+
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.10'

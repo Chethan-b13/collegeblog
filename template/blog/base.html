@@ -213,7 +213,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 			$(document).on('submit', '.reply-form', function(event){
 				event.preventDefault();
-				console.log($(this).serialize());
 				$.ajax({
 					type: 'POST',
 					url : $(this).attr('action'),
@@ -221,7 +220,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					dataType: 'json',
 					success: function(response){
 						$('.main-comment-section').html(response['form']);
-						$('textarea').val('');
+						$('.comment-area')=Element.val('')
+						console.log($('.comment-area').val(""));
 						$('.reply-btn').click(function(){
 							$(this).parent().parent().next().next().next('.replied-comments').fadeToggle();
 						});
@@ -247,6 +247,28 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					},
 					error: function(rs, e){
 						console.log(rs.responseText);
+					},
+				});
+			});
+
+
+			$(document).on('click','.comment-delete-section',function(event){
+				event.preventDefault();
+				var comment_id = $(this).attr('value');
+				console.log($(this).attr('action'));
+				$.ajax({
+					type:'POST',
+					url : $(this).attr('action'),
+					data: {'id':comment_id, 'csrfmiddlewaretoken':'{{csrf_token}}'},
+					dataType: 'json',
+					success : function(response){
+						$('.main-comment-section').html(response['form']);
+						$('.reply-btn').click(function(){
+							$(this).parent().parent().next().next().next('.replied-comments').fadeToggle();
+						});
+					},
+					error : function(rs, e){
+						console.log(rs,response);
 					},
 				});
 			});

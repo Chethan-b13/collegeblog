@@ -32,6 +32,7 @@
                                 <div class="value">
                                     <div class="input-group">
                                         <div class="textarea--style-6">
+                                            {{form.media}}
                                             {{form.desc}}
                                         </div>
                                     </div>
@@ -100,6 +101,12 @@
             </div>
         </form>
     </div>
+
+    <script>
+        $(function () {
+            CKEDITOR.replace('cke_id_desc',{ width: "500px",height: "500px"}); 
+        });
+    </script>
 
 {% endblock %}
 
