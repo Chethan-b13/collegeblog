@@ -22,11 +22,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
-    path('accounts/',include('Accounts.urls')),
+    path('accounts/', include('Accounts.urls')),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
     path('profile/', include('Profile.urls')),
-    path('tinymce/', include('tinymce.urls')),
-
+     url('^', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:

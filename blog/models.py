@@ -1,14 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.urls import reverse
 from ckeditor.fields import RichTextField
 
+
 class UserInfo(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user        = models.OneToOneField(User, on_delete=models.CASCADE)
     user_number = models.CharField(max_length=12, blank=True, default='')
     profile_pic = models.ImageField(upload_to='profile_pics', blank=True, default='/profile_pics/def.jpg')
-    user_link = models.URLField(max_length=200, blank=True)
-    user_bio = models.TextField(blank=True)
+    user_link   = models.URLField(max_length=200, blank=True)
+    user_bio    = models.TextField(blank=True)
     
 
     def __str__(self):
@@ -17,6 +20,16 @@ class UserInfo(models.Model):
     class Meta:
         verbose_name_plural =  'UserInfos'   
  
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserInfo.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.userinfo.save()
+
 
 class Category(models.Model):
     category_names = models.CharField(max_length=200)
@@ -45,20 +58,19 @@ class Posts(models.Model):
         ('Draft','Draft'),
         ('Publish','Publish'),
     )
-    title = models.CharField(max_length=200, default='')
+    title         = models.CharField(max_length=200, default='')
                                     
-    post_image = models.ImageField(upload_to='pics', default='/pics/campus.jpg')
-    desc = RichTextField()
+    post_image    = models.ImageField(upload_to='pics', default='/pics/campus.jpg')
+    desc          = RichTextField()
     uploaded_date = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    likes = models.ManyToManyField(User, related_name='likes', blank=True)
-    # is_liked = models.BooleanField(default=False)
-    author = models.ForeignKey(UserInfo, on_delete=models.CASCADE)
-    slug = models.SlugField(max_length=200)
-    post_link = models.URLField(max_length=200, null=True,blank=True)
-    is_hot = models.BooleanField(default= False, null= True, blank= True)
-    status = models.CharField(max_length=20, choices=status_choices, default='Draft')
+    updated_date  = models.DateTimeField(auto_now=True)
+    category      = models.ForeignKey(Category, on_delete=models.CASCADE)
+    likes         = models.ManyToManyField(User, related_name='likes', blank=True)
+    author        = models.ForeignKey(UserInfo, on_delete=models.CASCADE)
+    slug          = models.SlugField(max_length=200)
+    post_link     = models.URLField(max_length=200, null=True,blank=True)
+    is_hot        = models.BooleanField(default= False, null= True, blank= True)
+    status        = models.CharField(max_length=20, choices=status_choices, default='Draft')
 
 
     def get_absolute_url(self):

@@ -31,13 +31,13 @@
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="hero-text">
-								<h2 style="font-family: 'Josefin Sans'">{{USER.user.username}}</h2>
+								<h2 style="font-family: 'Josefin Sans'">{{USER.user.username | capfirst}}</h2>
 								{% if USER.user.username == request.user.username %}
 									{% if USER.user_bio %}
 										<p>{{USER.user_bio}}</p>
 									{% else %}
 									    <div class="addbio">
-											<a href=""><h3>Add Bio <i class="ion-android-add"></i></h3></a>
+											<a href="{% url 'Profile:EditProfile' %}#UserBio"><h3>Add Bio <i class="ion-android-add"></i></h3></a>
 										</div>
 									{% endif %}
 								{% endif %}
@@ -60,7 +60,14 @@
 						</div>
 						<div class="col-lg-6 img-circle">
 							<figure class="hero-image ">
-								<img src="/media/{{USER.profile_pic}}" alt="5">
+								{% if USER.profile_pic %}
+									<img src="/media/{{USER.profile_pic}}" alt="">
+								{% else %}
+									<img src="/static/images/profile/unknown.png" alt="">
+								{% endif %}
+								{% if USER.user.username == request.user.username %}
+									<a href="{% url 'Profile:EditProfile' %}"><i class="ion-compose" style="font-size: xx-large;"></i></a>
+								{% endif %}
 							</figure>
 						</div>
 					</div>

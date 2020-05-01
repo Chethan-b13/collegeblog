@@ -138,6 +138,73 @@ a{
   font-family: "Muli-Regular";
 }
 
+.form-holder label{
+  color: #333;
+  font-size:large;
+  font:bold;
+  font-family: "Muli-regular";
+}
+
+.form-group a{
+  font-family: 'Muli-regular';
+  font-size: small;
+  margin-left: -30%;
+  text-overflow: ellipsis;
+
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  width: 275px;
+}
+
+.form-control-file{
+  color: darkslategray;
+}
+
+input[type=checkbox] {
+  font-size: small;
+  transform: scale(0.8);
+}
+.form-group label{
+  font-size: small;
+  font-family: 'Muli-regular';
+}
+
+/* for reset passowrd */
+
+#resetform input[type=email]{
+    width: 300px;
+}
+#resetform label{
+  font-family: "Muli-bold";
+  color: #333;
+}
+
+#passwordform label{
+  color: rgb(44, 42, 40);
+  font-family: "Muli-bold";
+}
+
+#resetpasswdbtn {
+  width: 220px;
+  background: #0079f1; 
+  margin:20px auto auto auto;
+}
+
+#resetbutton {
+  width: 150px;
+  background: #0079f1; 
+  margin:20px auto auto auto;
+}
+
+#resethelptext{
+  padding-left: 45px; 
+  font-family:'Muli-Regular';
+}
+
+
+
+
 button {
   border: none;
   width: 100%;
@@ -189,6 +256,11 @@ button {
     width: 400px;
     left: 4%; } }
 @media (max-width: 767px) {
+
+  button{
+    background: rgba(22, 97, 172, 0.801);
+  }
+
   .inner {
     width: 100%;
     left: 0; }
@@ -215,4 +287,21 @@ button {
 /*# sourceMappingURL=style.css.map */
 .error{
   padding-left: 30px;
+}
+
+/* for smaller mobiles */
+
+@media only screen and (max-width: 479px){
+  .form-group a{
+    margin-left: -40%;
+  }
+}
+
+@media only screen and (max-width: 375px){
+  form a{
+    padding-left: 115px;
+  }
+  #resethelptext{
+    padding-left: 10px;
+  }
 }

@@ -6,4 +6,5 @@ app_name = 'Profile'
 urlpatterns = [
     path('<int:id>/<username>/', views.profile, name='profile'),
     path('delete/<int:id>/', views.Post_delete, name='PostDelete'),
+    path('profileEdit/', views.Edit_Profile, name='EditProfile'),
 ]

@@ -101,10 +101,11 @@ textarea:focus{ outline-color: #F9B500; }
 
 #author{
 
-	color: lightseagreen;
-	font-family: 'BlinkMacSystemFont', 'Segoe UI';
-	margin-left: 19%;
-	font-size: x-small;
+	color: lightslategray;
+	font-family: 'Poppins', sans-serif;;
+	float: right;
+	font-size: smaller;
+
 
 }
 
@@ -761,7 +762,7 @@ header .main-menu li.drop-down a.mouseover + ul.drop-down-menu{ display: block;
 .sided-70 .s-right{ min-height: 70px; }
 
 .sided-80x{ position: relative; }
-.sided-80x .s-left{ position: absolute; top: 0; left: 0; height: 80px; width: 80px; }
+.sided-80x .s-left{ position: absolute; top: 0; left: 0; width: 80px; }
 .sided-80x .s-left.rounded img{ border-radius: 80px; overflow: hidden; }
 .sided-80x .s-right{ margin-left: 95px; min-height: 80px; }
 
@@ -823,7 +824,9 @@ header .main-menu li.drop-down a.mouseover + ul.drop-down-menu{ display: block;
 	
 }
 
-
+.node-inner ul li {
+	list-style-type: disc;
+}
 
 /* FLOAT LEFT RIGHT	 */
 

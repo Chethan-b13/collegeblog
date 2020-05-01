@@ -7,14 +7,14 @@
                 <div class="mb-50">
                     <h5 class="mb-30"><b>TOP STORIES</b></h5>
                     {% for Top4 in Top4_side %}
-                    <div class="sided-80x mb-20">
-                        <div class="s-left img-hover-zoom" style="overflow: hidden;">
-                            <img src="/media/{{Top4.post_image}}" alt="">
-                        </div><!-- s-left -->
-                        <div class="s-right">
-                            <h5 class="pt-5"  style="overflow-x: hidden;width: 100px;"><a href="{% url 'blog:detail' Top4.id Top4.slug %}"><b>{{Top4.title}}</b></a></h5>
-                        </div><!-- s-left -->
-                    </div><!-- sided-80x -->
+                        <div class="sided-80x mb-20">
+                            <div class="s-left img-hover-zoom" style="overflow: hidden;">
+                                <img src="/media/{{Top4.post_image}}" alt="">
+                            </div><!-- s-left -->
+                            <div class="s-right">
+                                <h5 class="pt-5"  style="overflow-x: hidden;width: 100px;"><a href="{% url 'blog:detail' Top4.id Top4.slug %}"><b>{{Top4.title}}</b></a></h5>
+                            </div><!-- s-left -->
+                        </div><!-- sided-80x -->
                     {% endfor %}
 
                     
@@ -37,45 +37,20 @@
                 <div class="mb-50">
                     <h5 class="mb-30"><b>NEWEST VIDEO</b></h5>
                     
-                    <div class="sided-80x mb-20">
-                        <div class="s-left">
-                            <a class="v-icn" href="#"><i class="ion-play"></i></a>
-                            <img src="{% static 'images/top_5_120x120.jpg' %}" alt="">
-                        </div><!-- s-left -->
-                        <div class="s-right">
-                            <h5 class="pt-5"><a href="#"><b>I Got off Addrall and Xanax Using Psilocybon</b></a></h5>
-                        </div><!-- s-left -->
-                    </div><!-- sided-80x -->
+                    {% for Art_video in Art %}
+                        {% if Art_video.post_link  %}
+                            <div class="sided-80x mb-20">
+                                <div class="s-left">
+                                    <a class="v-icn" href="{{Art_video.post_link}}"><i class="ion-play"></i></a>
+                                    <img src="/media/{{Art_video.post_image}}" alt="">
+                                </div><!-- s-left -->
+                                <div class="s-right">
+                                    <h5 class="pt-5"><a href="{% url 'blog:detail' Art_video.id Art_video.slug %}"><b>{{Art_video.title}}</b></a></h5>
+                                </div><!-- s-left -->
+                            </div><!-- sided-80x -->
+                        {% endif %}
+                    {% endfor %}
                     
-                    <div class="sided-80x mb-20">
-                        <div class="s-left">
-                            <a class="v-icn" href="#"><i class="ion-play"></i></a>
-                            <img src="{% static 'images/top_6_120x120.jpg' %}" alt="">
-                        </div><!-- s-left -->
-                        <div class="s-right">
-                            <h5 class="pt-5"><a href="#"><b>I Got off Addrall and Xanax Using Psilocybon</b></a></h5>
-                        </div><!-- s-left -->
-                    </div><!-- sided-80x -->
-                    
-                    <div class="sided-80x mb-20">
-                        <div class="s-left">
-                            <a class="v-icn" href="#"><i class="ion-play"></i></a>
-                            <img src="{% static 'images/top_7_120x120.jpg' %}" alt="">
-                        </div><!-- s-left -->
-                        <div class="s-right">
-                            <h5 class="pt-5"><a href="#"><b>I Got off Addrall and Xanax Using Psilocybon</b></a></h5>
-                        </div><!-- s-left -->
-                    </div><!-- sided-80x -->
-                    
-                    <div class="sided-80x mb-20">
-                        <div class="s-left">
-                            <a class="v-icn" href="#"><i class="ion-play"></i></a>
-                            <img src="{% static 'images/top_1_120x120.jpg' %}" alt="">
-                        </div><!-- s-left -->
-                        <div class="s-right">
-                            <h5 class="pt-5"><a href="#"><b>I Got off Addrall and Xanax Using Psilocybon</b></a></h5>
-                        </div><!-- s-left -->
-                    </div><!-- sided-80x -->
                 </div><!-- mb-50 -->
                 
                 

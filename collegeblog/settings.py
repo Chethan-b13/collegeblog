@@ -14,11 +14,12 @@ import os
 
 
 
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'chethancheths13@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_PASSWORD = 'kxrutuygfckbchit'
 EMAIL_PORT = '587'
 
 
@@ -35,7 +36,7 @@ SECRET_KEY = 'g=q1y5+j0fc+c$5anc!6d&uzejt!m4rf=6c5#lwo$lsar63(%1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','192.168.2.18', ' 127.0.0.1:8000']
+ALLOWED_HOSTS = ['localhost', '192.168.2.18', ' 127.0.0.1:8000']
 
 
 # Application definition
@@ -50,7 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'ckeditor',
-    'tinymce',
+    'django_cleanup.apps.CleanupConfig',
     
 ]
 
@@ -68,7 +69,7 @@ CKEDITOR_CONFIGS = {
             # 'Table' 
             # ]
             ["Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker",'TextColor'],
-                ['NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter',
+                ['JustifyLeft', 'JustifyCenter',
                  'JustifyRight', 'JustifyBlock'],
                 ["Image", "Table", "Link", "Smiley"], ['Undo', 'Redo'],
                 ["Maximize"]
@@ -176,13 +177,13 @@ STATIC_ROOT = os.path.join(BASE_DIR,'assets')
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 LOGIN_REDIRECT_URL = 'blog:home'
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '307891520079-v4q8snjfjm21r1t8ihei437193ml2u2d.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'hLGMd6d2EX6vxnn6_PXabxOi'
-SOCIAL_AUTH_FACEBOOK_KEY = '1130574253989091'
-SOCIAL_AUTH_FACEBOOK_SECRET = 'eb37426e0efdbbea1107b8d5234521c9'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('SOCIAL_AUTH_FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('SOCIAL_AUTH_FACEBOOK_SECRET')
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.10'
