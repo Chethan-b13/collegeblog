@@ -1,0 +1,235 @@
+{% load liked_extras %}
+
+{% if Top %}
+    <div class="row">
+        {% if Top.0 %}
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4 mb-30">
+                <div class="card h-100 bg-white">
+                    <div class="plr-25 ptb-15 h-100">
+                        <div class="dplay-tbl">
+                            <div class="dplay-tbl-cell">
+                                <h5 class="color-ash"><b>{{Top.0.category}}</b></h5>
+                                <h2 class="mtb-10"><a href="{% url 'blog:detail' Top.0.id Top.0.slug %}">
+                                    <b>{{Top.0.title}}</b></a></h2>
+                                <ul class="list-li-mr-10 color-lt-black">
+
+                                    <div class="like-section{{Top.0.id}}">
+                                        {% include 'blog/like.html' with condtion=Top.0   %}
+                                    </div>
+                                    
+                                    <li style="float: right;"><a href="{% url 'blog:detail' Top.0.id Top.0.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{Top.0|Comment_count}}</a></li>
+                                    
+                                    <!-- <li><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
+                                </ul>
+                            </div><!-- dplay-tbl-cell -->
+                        </div><!-- dplay-tbl -->
+                    </div><!-- plr-25 ptb-15 -->
+                </div><!-- card -->
+            </div><!-- col-lg-4 col-md-6 -->
+        {% endif %}
+
+
+        {% if Top.1 %}
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8 mb-30">
+            <div class="card h-100 h-xs-500x">
+                <div class="sided-half sided-xs-half h-100 bg-white">
+                
+                    <!-- SETTING IMAGE WITH bg-9 -->
+                    <div class="s-left w-50 w-xs-100 h-100 h-xs-50 pos-relative">
+                        <div class=" abs-tblr" style="background: url('/media/{{Top.1.post_image}}') no-repeat center; background-size: cover;"></div></div>
+                    
+                    <div class="s-right w-50 w-xs-100 h-xs-50">
+                        <div class="plr-25 ptb-25 h-100">
+                            <div class="dplay-tbl">
+                                <div class="dplay-tbl-cell">
+                                
+                                    <h5 class="color-ash"><b>{{Top.1.category}}</b></h5>
+                                    <h2 class="mtb-10"><a href="{% url 'blog:detail' Top.1.id Top.1.slug %}">
+                                        <b>{{Top.1.title}}</b></a></h2>
+                                    <ul class="list-li-mr-10 color-lt-black">
+
+                                        <div class="like-section{{Top.1.id}}">
+                                        
+                                            {% include 'blog/like.html' with condtion=Top.1   %}
+                                        </div>
+
+                                        <li style="float: right;"><a href="{% url 'blog:detail' Top.1.id Top.1.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{Top.1|Comment_count}}</a></li>
+
+                                        <!-- <li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
+                                    </ul>
+                                    
+                                </div><!-- dplay-tbl-cell -->
+                            </div><!-- dplay-tbl -->
+                        </div><!-- plr-25 ptb-25 -->
+                    </div><!-- s-right -->
+                </div><!-- sided-half -->
+            </div><!-- card -->
+        </div><!-- col-lg-8 col-md-12 -->
+        {% endif %}
+
+
+        {% if Top.2 and Top.3 %}
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4 mb-30">
+                <div class="card h-100">
+                    
+                    
+                    <div class="h-50 pb-15">
+                        <div class="plr-25 h-100 ptb-15 pos-relative bg-layer-4 color-white" style="background: url('/media/{{Top.2.post_image}}') no-repeat center; background-size: cover;">
+                            <div class="dplay-tbl">
+                                <div class="dplay-tbl-cell">
+                                
+                                    <h5 class="color-grey"><b>{{Top.2.category}}</b></h5>
+                                    <h4 class="mtb-10"><a href="{% url 'blog:detail' Top.2.id Top.2.slug %}"><b>{{Top.2.title| truncatechars:25}}</b></a></h4>
+                                    <ul class="list-li-mr-10 color-white">
+
+
+                                        <div class="like-section{{Top.2.id}}">
+                                            {% include 'blog/like.html' with condtion=Top.2   %}
+                                        </div>
+                                        <li style="float: right;"><a href="{% url 'blog:detail' Top.2.id Top.2.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{Top.2|Comment_count}}</a></li>
+
+                                        <!-- <li><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
+                                    </ul>
+                                    
+                                </div><!-- dplay-tbl-cell -->
+                            </div><!-- dplay-tbl -->
+                        </div><!-- plr-25 ptb-15 -->
+                    </div><!--h-50 bg-white -->
+                    
+
+                    <div class="h-50 pt-15">
+                        
+                        <!-- SETTING IMAGE WITH bg-7 -->
+                        <div class="plr-25 ptb-15 pos-relative h-100 bg-layer-4 color-white" style="background: url('/media/{{Top.3.post_image}}') no-repeat center; background-size: cover;">
+                            <div class="dplay-tbl">
+                                <div class="dplay-tbl-cell">
+                                
+                                    <h5 class="color-grey"><b>{{Top.3.category}}</b></h5>
+                                    <h4 class="mtb-10"><a href="{% url 'blog:detail' Top.3.id Top.3.slug %}"><b>{{Top.3.title| truncatechars:25}}</b></a></h4>
+                                    <ul class="list-li-mr-10 color-white">
+                                        
+                                        <div class="like-section{{Top.3.id}}">
+                                            {% include 'blog/like.html' with condtion=Top.3   %}
+                                        </div>
+                                        <li style="float: right;"><a href="{% url 'blog:detail' Top.3.id Top.3.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{Top.3|Comment_count}}</a></li>
+                                        
+                                        <!-- <li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
+                                    </ul>
+                                    
+                                </div><!-- dplay-tbl-cell -->
+                            </div><!-- dplay-tbl -->
+                        </div><!-- plr-25 ptb-15 -->
+                    </div><!--h-50 bg-white -->
+                
+                </div><!-- card -->
+            </div><!-- col-lg-4 col-md-6 -->
+        {% elif Top.2 %}
+            <div class=" col-sm-6 col-md-6 col-lg-6 col-xl-4 mb-30">
+                <div class="card h-100 min-h-350x">
+                    <div class="bg-white h-100">
+                    
+                        <!-- SETTING IMAGE WITH bg-10 -->
+                        <div class="h-50 " style="background: url('/media/{{Top.2.post_image}}') no-repeat center; background-size: cover;"></div>
+                        
+                        <div class="plr-25 ptb-15 h-50">
+                            <div class="dplay-tbl">
+                                <div class="dplay-tbl-cell">
+                                
+                                    <h5 class="color-ash"><b>{{Top.2.category}}</b></h5>
+                                    <h4 class="mtb-10">
+                                        <a href="{% url 'blog:detail' Top.2.id Top.2.slug %}"><b>{{Top.2.title| truncatechars:25}}</b></a></h4>
+                                    <ul class="list-li-mr-10 color-lt-black">
+
+                                        <div class="like-section{{Top.2.id}}">
+                                            {% include 'blog/like.html' with condtion=Top.2   %}
+                                        </div>
+                                        <li style="float: right;"><a href="{% url 'blog:detail' Top.2.id Top.2.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{Top.2|Comment_count}}</a></li>
+
+                                        <!-- <li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
+                                    </ul>
+                                    
+                                </div><!-- dplay-tbl-cell -->
+                            </div><!-- dplay-tbl -->
+                        </div><!-- plr-25 ptb-15 -->
+                    </div><!-- hot-news -->
+                </div><!-- card -->
+            </div><!-- col-lg-4 col-md-6 -->
+        {% endif %}
+            
+
+        {% if Top.4 %}
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4 mb-30">
+            
+                <!-- SETTING IMAGE WITH bg-8 -->
+                <div class="card pos-relative h-100  bg-layer-4 color-white" style="background: url('/media/{{Top.4.post_image}}') no-repeat center; background-size: cover;">
+                    <div class="plr-25 ptb-15 h-100">
+                        <div class="dplay-tbl">
+                            <div class="dplay-tbl-cell">
+                            
+                                <h5 class="color-grey"><b>{{Top.4.category}}</b></h5>
+                                <h2 class="mtb-10"><a href="{% url 'blog:detail' Top.4.id Top.4.slug %}">
+                                    <b>{{Top.4.title| truncatechars:40}}</b></a></h2>
+                                <ul class="list-li-mr-10 color-grey">
+
+                                    <div class="like-section{{Top.4.id}}">
+                                        {% include 'blog/like.html' with condtion=Top.4   %}
+                                    </div>
+                                    <li style="float: right;"><a href="{% url 'blog:detail' Top.4.id Top.4.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{Top.4|Comment_count}}</a></li>
+
+                                    <!-- <li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
+                                </ul>
+                                
+                            </div><!-- dplay-tbl-cell -->
+                        </div><!-- dplay-tbl -->
+                    </div><!-- plr-25 ptb-15 -->
+                </div><!-- card -->
+            </div><!-- col-lg-4 col-md-6 -->
+        {% endif %}
+
+
+        {% if Top.5 %}
+            <div class=" col-sm-6 col-md-6 col-lg-6 col-xl-4 mb-30">
+                <div class="card h-100 min-h-350x">
+                    <div class="bg-white h-100">
+                    
+                        <!-- SETTING IMAGE WITH bg-10 -->
+                        <div class="h-50 " style="background: url('/media/{{Top.5.post_image}}') no-repeat center; background-size: cover;"></div>
+                        
+                        <div class="plr-25 ptb-15 h-50">
+                            <div class="dplay-tbl">
+                                <div class="dplay-tbl-cell">
+                                
+                                    <h5 class="color-ash"><b>{{Top.5.category}}</b></h5>
+                                    <h4 class="mtb-10">
+                                        <a href="{% url 'blog:detail' Top.5.id Top.5.slug %}"><b>{{Top.5.title| truncatechars:25}}</b></a></h4>
+                                    <ul class="list-li-mr-10 color-lt-black">
+
+                                        <div class="like-section{{Top.5.id}}">
+                                            {% include 'blog/like.html' with condtion=Top.5   %}
+                                        </div>
+                                        <li style="float: right;"><a href="{% url 'blog:detail' Top.5.id Top.5.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{Top.5|Comment_count}}</a></li>
+
+                                        <!-- <li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
+                                    </ul>
+                                    
+                                </div><!-- dplay-tbl-cell -->
+                            </div><!-- dplay-tbl -->
+                        </div><!-- plr-25 ptb-15 -->
+                    </div><!-- hot-news -->
+                </div><!-- card -->
+            </div><!-- col-lg-4 col-md-6 -->
+        {% endif %}
+
+
+    </div><!-- row -->
+
+
+
+<!-- else for no posts  -->
+{% elif request.user.is_authenticated %}
+    <div class="col mb-30 mt-20 clearfix text-center">
+        <a href="" class="btn btn-success btn-lg">Add Post</a>
+    </div>
+{% else %}
+    <h2 style="color: orangered;">No related Posts Yet</h2>
+{% endif %}

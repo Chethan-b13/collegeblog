@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.template.loader import render_to_string
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from .models import Posts, Comment
+from .models import Posts, Comment, Category
 from Accounts.forms import CommentForm
 
 class Indexview(generic.ListView):
@@ -14,25 +14,22 @@ class Indexview(generic.ListView):
     model = Posts
     def get_context_data(self, *, object_list=None, **kwargs):
         Hot_News = Posts.published.all().order_by('-id')
-        Articles = Posts.published.filter(category=3).annotate(l_count=Count('likes')).order_by('-l_count')
-        Art = Posts.published.filter(category=2).order_by('-uploaded_date')
-        Top_news = Posts.published.annotate(l_count=Count('likes')).order_by('-l_count')
-        Top4_side = Posts.published.annotate(l_count=Count('likes')).order_by('-l_count')[:4]
-        return {'Hot_News':Hot_News, 'Top':Top_news, 'Articles':Articles, 'Art':Art, 'Top4_side':Top4_side}
+        Events = Hot_News.filter(category=1).annotate(l_count=Count('likes')).order_by('-l_count')
+        Articles = Hot_News.filter(category=3).annotate(l_count=Count('likes')).order_by('-l_count')
+        Art = Hot_News.filter(category=2).annotate(l_count=Count('likes')).order_by('-l_count')
+        Top = Hot_News.annotate(l_count=Count('likes')).order_by('-l_count')
+        # Top_news = Posts.published.all().order_by('-uploaded_date')
+        # Top4_side = Posts.published.annotate(l_count=Count('likes')).order_by('-l_count')[:4]
+        return {'Hot_News':Hot_News, 'Top':Top, 'Articles':Articles, 'Art':Art, 
+                'Top4_side':Hot_News[:4], 'side_Art':Art, 'Events':Events
+                }
 
-    # def post(self, request, *args, **kwargs):
-    #     post = get_object_or_404(Posts, id=request.POST.get('id'))
-    #     is_liked = False
-    #     if post.likes.filter(id=request.user.id).exists():
-    #         is_liked = True
-        
-    #     return self.get_context_data()+{'is_liked':is_liked}
+
 
 
 @login_required
 def PostLike(request):
     post = get_object_or_404(Posts, id=request.POST.get('id'))
-    print(post)
     is_liked = False
     if post.likes.filter(id=request.user.id).exists():
         post.likes.remove(request.user)
@@ -48,7 +45,7 @@ def PostLike(request):
         'condtion':post,
     }
     if request.is_ajax():
-        print(context)
+
         html = render_to_string('blog/like.html', context, request=request)
         return JsonResponse({'form': html})
 
@@ -56,8 +53,9 @@ def PostLike(request):
 def detailview(request, id, slug):
     Post = get_object_or_404(Posts, pk=id)
     comments = Comment.objects.filter(Post=Post, Reply=None).order_by('-id')
-    Top4_side = Posts.published.all().order_by('-likes')[:4]
-    ManyPosts = Posts.published.filter(category=Post.category).order_by('-likes')[:4]
+    News = Posts.published.all().order_by('-id')
+    ManyPosts = News.filter(category=Post.category).annotate(l_count=Count('likes')).order_by('-l_count')[:4]
+    Art = News.filter(category=2).annotate(l_count=Count('likes')).order_by('-l_count')
 
     if request.method == 'POST':
         comment_form = CommentForm(request.POST or None)
@@ -78,9 +76,10 @@ def detailview(request, id, slug):
     context = {
         'Post':Post, 
         'Cat_posts':ManyPosts, 
-        'Top4_side':Top4_side, 
+        'Top4_side':News[:4], 
         'Comments':comments,
-        'comment_form':comment_form
+        'comment_form':comment_form,
+        'Art':Art,
     }
 
     if request.is_ajax():
@@ -106,3 +105,13 @@ def CommentDelete(request, id):
     if request.is_ajax():
         html = render_to_string('blog/comments.html', context, request=request)
         return JsonResponse({'form': html})
+
+
+def Category_List(request, id, category):
+    category_post = Posts.published.filter(category=id)
+    category = Category.objects.get(id=id)
+    News = Posts.published.order_by('-id')
+    Art = News.filter(category=2).annotate(l_count=Count('likes')).order_by('-l_count')
+    return render(request, 'blog/category.html', {'Category_Posts':category_post, 'category':category,
+                                                  'Top4_side':News[:4], 'Art':Art })
+                                                            

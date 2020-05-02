@@ -22,7 +22,9 @@
 	<link rel="stylesheet" href="{% static 'css/profile/magnific-popup.css' %}"/>
 	<link rel="stylesheet" href="{% static 'css/profile/style.css' %}"/>
 
+	{% block styles %}
 
+	{% endblock styles %}
 
 	
 	<!-- Font -->
@@ -42,24 +44,24 @@
 		<div class="loader"></div>
 	</div>
 	<header>
-		<a class="logo" href="{% url 'blog:home' %}"><img src="{% static 'images/logo1.png' %}" alt="Logo" style="margin-left: 35%;"></a>
+		<a class="logo" href="{% url 'blog:home' %}"><img src="{% static 'images/Blog1.png' %}" alt="Logo" style="margin-left: 35%;"></a>
 		
 		<a class="menu-nav-icon" data-menu="#main-menu" href="#"><i class="ion-navicon"></i></a>	
 		<ul class="main-menu" id="main-menu">
 			<li><a href="{% url 'blog:home' %}">Home</a></li>
-			<li class="drop-down"><a href="#!">Articles<i class="ion-arrow-down-b"></i></a>
+			<li class="drop-down"><a href="{% url 'blog:category' id=3 category='Articles' %}">Articles<i class="ion-arrow-down-b"></i></a>
 				<ul class="drop-down-menu drop-down-inner">
 					<li><a href="#">Student's articles</a></li>
 					<li><a href="#">Teacher's Articles</a></li>
 				</ul>
 			</li>
-			<li class="drop-down"><a href="#!">Events<i class="ion-arrow-down-b"></i></a>
+			<li class="drop-down"><a href="{% url 'blog:category' id=1 category='Events' %}">Events<i class="ion-arrow-down-b"></i></a>
 				<ul class="drop-down-menu drop-down-inner">
 					<li><a href="#">College</a></li>
 					<li><a href="#">Inter-college</a></li>
 				</ul>
 			</li>
-			<li><a href="#">Art ShowCase</a></li>
+			<li><a href="{% url 'blog:category' id=2 category='Art' %}">Art ShowCase</a></li>
 			<li><a href="#">About College</a></li>
 			<li><a href="#">Contact</a></li>
 			{% if user.is_authenticated %}
@@ -102,7 +104,7 @@
 						<div class="dplay-tbl">
 							<div class="dplay-tbl-cell">
 							
-								<a href="#"><img src="{% static 'images/logo1.png' %}"></a>
+								<a href="#"><img src="{% static 'images/Blog1.png' %}"></a>
 								<p class="color-ash mt-25"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ion-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>

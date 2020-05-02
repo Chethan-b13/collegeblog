@@ -44,14 +44,14 @@
 					</h5>
 					
 					<h3 class="mtb-50"><b>“{{Post.title}}”</b></h3>
-					<p class="mt-40 mt-sm-10">{{Post.desc|safe}}</p>	
-					<h5 class="mb-30 mtb-40 color-facebook"><b>Links :</b></h5>
+					<h4 class="mt-40 mt-sm-10 node-inner">{{Post.desc|safe}}</h4>	
+					<h5 class="mt-40 color-facebook"><b>Links :</b></h5>
 
 					{% if Post.post_link  %}	
-						<h4 class="mb-30 mtb-50 ">Post Related : <a href="{{Post.post_link}}" class="text-info"> {{Post.post_link | truncatechars:60 |urlize}} </a></h4>
+						<p >Post Related : <a href="{{Post.post_link}}" class="text-info"> {{Post.post_link | truncatechars:60 |urlize}} </a></p>
 					{% endif %}
 					{% if Post.author.user_link  %}	
-						<h4 class="mb-30 mtb-50 ">User Related : <a href="{{Post.author.user_link }}" class="text-info"> {{Post.author.user_link | urlize}}</a></h4>
+						<p class="mb-30">User Related : <a href="{{Post.author.user_link }}" class="text-info"> {{Post.author.user_link | urlize}}</a></p>
 					{% endif %}
 					<hr>
 					<!-- <p class="mb-50">Though I was eager to share the results of the experiment with others who suffer from depression or other mood issues, my previous book, 
@@ -116,7 +116,7 @@
 															</div>							
 															<li style="float: right;"><a href="{% url 'blog:detail' CatPost.id CatPost.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{CatPost|Comment_count}}</a></li>
 
-															<li ><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li>
+															<!-- <li ><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
 														</ul>	
 												</div><!-- dplay-tbl-cell -->
 											</div><!-- dplay-tbl -->

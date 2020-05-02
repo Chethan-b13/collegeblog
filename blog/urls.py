@@ -8,5 +8,5 @@ urlpatterns = [
     path('blog/<int:id>/<slug:slug>/', views.detailview, name='detail'),
     path('likes/', views.PostLike, name='Like'),
     path('<int:id>/DeleteComment/', views.CommentDelete, name='DeleteComment'),
-
+    path('<int:id>/<str:category>/', views.Category_List, name='category'),
 ]

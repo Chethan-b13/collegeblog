@@ -1,0 +1,118 @@
+{% extends 'accounts/base.html' %}
+{% block content %}
+{% load static %}
+		<!-- {% if messages %}
+            <div style="text-align: center;">
+                <h1>Thank you For Registering</h1>
+                <hr >
+                {% for message in messages%}
+                    <p style="color: rgb(95, 0, 0);">{{message}}</p>
+                {% endfor %}
+                <button>
+                    <span>Login</span>
+                </button>
+            </div>
+		{% else %} -->
+		
+		<div class="wrapper">
+			<div class="inner">
+				<img src="{% static 'images/authsystem/image-1.png' %}" alt="" class="image-1">
+
+				<form action="{% url 'Profile:EditProfile' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    					
+					<h3>Edit Profile</h3>
+					<div class="form-holder">
+						<span class="lnr lnr-user"></span>
+						<div class="form-control">
+							{{ UserForm.username }}
+						</div>
+						<div class="error">
+
+							{% for error in UserForm.username.errors %}
+							<p style="color: rgb(187, 42, 42);">{{ error }}</p>
+							{% endfor %}
+
+						</div>
+						
+						<!-- <input type="text" class="form-control" placeholder="Username"> -->
+					</div>
+
+
+					<div class="form-holder">
+						<span class="lnr lnr-envelope"></span>
+						<div class="form-control">
+							{{ UserForm.email }}
+						</div>
+						<div class="error">
+							{% for error in UserForm.email.errors %}
+							<p style="color: rgb(187, 42, 42);">{{ error }}</p>
+							{% endfor %}
+						</div>
+					</div>
+
+					<div class="form-holder">
+						<span class="lnr lnr-phone-handset"></span>
+						<div class="form-control">
+							{{ UserInfoForm.user_number }}
+						</div>
+						<div class="error">
+							{% for error in UserForm.user_number.errors %}
+							<p style="color: rgb(187, 42, 42);">{{ error }}</p>
+							{% endfor %}
+						</div>
+					</div>
+
+
+
+					<div class="form-holder">
+						<label for=""><i class="lnr lnr-upload"></i> Profile Pic : {{ UserInfoForm.profile_pic.url }}</label>
+						<div class="form-group text-center">
+							{{ UserInfoForm.profile_pic }}
+						</div>
+						<div class="error">
+							{% for error in UserInfoForm.profile_pic.errors %}
+							<p style="color: rgb(187, 42, 42);">{{ error }}</p>
+							{% endfor %}
+						</div>
+                    </div><hr>
+                    
+                    <div class="form-holder" id="UserBio">
+						<label for=""><i class="lnr lnr-eye"></i> Bio:</label>
+						<div class="form-group">
+							<div class="textarea">
+                                {{ UserInfoForm.user_bio }}
+                            </div>
+						</div>
+						<div class="error">
+							{% for error in UserInfoForm.user_bio.errors %}
+							<p style="color: rgb(187, 42, 42);">{{ error }}</p>
+							{% endfor %}
+						</div>
+                    </div><hr>
+                    
+                    <div class="form-holder">
+						<span class="lnr lnr-link"></span>
+						<div class="form-control">
+							{{ UserInfoForm.user_link }}
+						</div>
+						<div class="error">
+							{% for error in UserInfoForm.user_link.errors %}
+							<p style="color: rgb(187, 42, 42);">{{ error }}</p>
+							{% endfor %}
+						</div>
+					</div>
+					
+					<button type="submit">
+						<span>Update</span>
+					</button>
+
+				</form>
+
+				<img src="{% static 'images/authsystem/image-2.png' %}" alt="" class="image-2">
+			</div>
+			
+		</div>
+		
+		{% endif %}
+{% endblock %}

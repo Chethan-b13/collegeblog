@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.utils.encoding import force_bytes, force_text
 from .utils import generate_token
-from django.views.generic import UpdateView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from blog.models import UserInfo, Posts
@@ -67,22 +66,13 @@ def Register(request):
             [email],
             fail_silently=False,
             )
-            # user.email_user(subject, message)
-            # prof_pic = form.cleaned_data.get('profile_pic')
-            # user_link = form.cleaned_data.get('user_link')
-            user_num = form.cleaned_data.get('Phone_number')
 
-
-            userinfo = UserInfo.objects.create(user=user, user_number=user_num)
+            userinfo = UserInfo.objects.get(user=user)
+            userinfo.user_number = form.cleaned_data.get('Phone_number')
             userinfo.save()
             messages.info(request, 'A mail has been sent to Your registered email.\n Make sure you confirm your email by clicking the link')
             return redirect('accounts:confirm')
-            # if user.is_active:
-            #     created_user = authenticate(username=username, password=password)
-            #     login(request, created_user)
-            #     return redirect('blog:home')
-            # else:
-            #     messages.info(request, 'A mail has been sent to Your registered email.\n Make sure you confirm your email by clicking the link')
+
     else:
         form = SignUpForm() 
 
@@ -93,7 +83,6 @@ class ActivateAccount(View):
         try:
             uid = force_text(urlsafe_base64_decode(uidb64))
             user = User.objects.get(pk=uid)
-            # print(user.password)
 
         except Exception as exception:
             user=None
@@ -101,7 +90,6 @@ class ActivateAccount(View):
         if user is not None and generate_token.check_token(user, token):
             user.is_active = True
             user.save()
-            print(user.is_active)
             messages.success(request, 'Account activated succesfully')
             # login(request,user)
             return redirect('accounts:confirm')
@@ -135,12 +123,9 @@ def CreatePost(request):
     return render(request, 'Post_create/PostCreate.html', {'form':form})    
 
 
-# class PostUpdate(UpdateView):
-#     model = Posts
-#     fields = ['title', 'post_image', 'desc', 'category', 'post_link']
-#     template_name = 'Post_create/PostUpdate.html'
-#     success_url = 'blog:home'
 
+
+@login_required
 def PostUpdate(request, id):
     context ={} 
     obj = get_object_or_404(Posts, id=id)
@@ -155,7 +140,7 @@ def PostUpdate(request, id):
         messages.success(request, "Post Updated succesfully")
         return redirect(reverse('blog:detail', kwargs={'id':obj.id, 'slug':obj.slug}))
     
-    context['form'] = PostCreationForm( instance=obj)
+    context['form'] = PostCreationForm(instance=obj)
     
     return render(request, 'Post_create/PostUpdate.html', context)    
     
