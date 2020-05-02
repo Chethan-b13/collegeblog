@@ -555,6 +555,12 @@ header .main-menu li.drop-down a.mouseover + ul.drop-down-menu{ display: block;
 .color-facebook{ color: #365B99; }
 .color-twitter{ color: #58ADEE; }
 .color-google{ color: #E14A3D; }
+.color-whatsapp{color: #25D366;}
+.color-linkedin{color: #006fb6;}
+
+#share li{
+	padding-left: 5%;
+}
 
 /* BACKGROUND COLOR*/
 
@@ -628,6 +634,8 @@ header .main-menu li.drop-down a.mouseover + ul.drop-down-menu{ display: block;
 .zoom:hover{
 	transform: scale(0.85);
 }
+
+
 
 /* RESPONSIVE */
 

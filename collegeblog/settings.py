@@ -36,7 +36,7 @@ SECRET_KEY = 'g=q1y5+j0fc+c$5anc!6d&uzejt!m4rf=6c5#lwo$lsar63(%1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '192.168.2.18', ' 127.0.0.1:8000']
+ALLOWED_HOSTS = ['localhost', '192.168.2.18', '127.0.0.1',]
 
 
 # Application definition
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'social_django',
     'ckeditor',
     'django_cleanup.apps.CleanupConfig',
+    'django_social_share',
     
 ]
 

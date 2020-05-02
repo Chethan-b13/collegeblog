@@ -1,5 +1,8 @@
 {% extends 'blog/base.html' %}
 {% load liked_extras %}
+<!-- social sharing -->
+{% load social_share %}
+
 	{% block content %}
 	<div class="slider-main h-500x h-sm-auto pos-relative pt-95 pb-25">
 		<div class="img-bg bg-16 bg-layer-6" style="background: url('/media/{{Post.post_image}}') no-repeat center; background-size: cover;"></div>
@@ -68,7 +71,7 @@
 									{% if Post.author.profile_pic %}
 									<a href="{% url 'Profile:profile' id=Post.author.user.id username=Post.author %}"><img src="/media/{{Post.author.profile_pic}}" alt="" class="zoom"></a>
 									{% else %}
-									<img src="/media/profile_pics/def.png" alt="">
+									<img src="/static/images/def.png" alt="No Profile Pic">
 									{% endif %}
 								</div><!-- s-left-->
 								
@@ -78,12 +81,12 @@
 							</div><!-- sided-80x-->
 						</div><!-- col-md-6-->
 						
-						<div class="col-sm-12 col-md-6">
+						<div class="col-sm-12 col-md-6 " id="share">
 							<ul class="color-ash lh-70 text-right text-sm-left list-a-plr-10 font-13">
 								<li><b>SHARE</b></li>
-								<li><a href="#"><i class="color-facebook ion-social-facebook"></i></a></li>
-								<li><a href="#"><i class="color-twitter ion-social-twitter"></i></a></li>
-								<li><a href="#"><i class="color-google ion-social-google"></i></a></li>
+								<li>{% post_to_facebook request.build_absolute_uri  "<i class='color-facebook ion-social-facebook'></i>" %}</li>
+								<li>{% post_to_linkedin Share_title request.build_absolute_uri  "<i class='color-linkedin ion-social-linkedin'></i>" %}</li>
+								<li>{% post_to_whatsapp request.build_absolute_uri "<i class='color-whatsapp ion-social-whatsapp'></i>" %}</li>
 							</ul>
 						</div><!-- col-md-6-->
 					</div><!-- row-->

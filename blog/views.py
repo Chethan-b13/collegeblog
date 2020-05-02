@@ -13,13 +13,13 @@ class Indexview(generic.ListView):
     template_name = 'blog/index.html'
     model = Posts
     def get_context_data(self, *, object_list=None, **kwargs):
+        
         Hot_News = Posts.published.all().order_by('-id')
         Events = Hot_News.filter(category=1).annotate(l_count=Count('likes')).order_by('-l_count')
         Articles = Hot_News.filter(category=3).annotate(l_count=Count('likes')).order_by('-l_count')
         Art = Hot_News.filter(category=2).annotate(l_count=Count('likes')).order_by('-l_count')
         Top = Hot_News.annotate(l_count=Count('likes')).order_by('-l_count')
-        # Top_news = Posts.published.all().order_by('-uploaded_date')
-        # Top4_side = Posts.published.annotate(l_count=Count('likes')).order_by('-l_count')[:4]
+
         return {'Hot_News':Hot_News, 'Top':Top, 'Articles':Articles, 'Art':Art, 
                 'Top4_side':Hot_News[:4], 'side_Art':Art, 'Events':Events
                 }
@@ -79,7 +79,7 @@ def detailview(request, id, slug):
         'Top4_side':News[:4], 
         'Comments':comments,
         'comment_form':comment_form,
-        'Art':Art,
+        'Art':Art,        
     }
 
     if request.is_ajax():
@@ -108,7 +108,7 @@ def CommentDelete(request, id):
 
 
 def Category_List(request, id, category):
-    category_post = Posts.published.filter(category=id)
+    category_post = Posts.published.filter(category=id).order_by('-id')
     category = Category.objects.get(id=id)
     News = Posts.published.order_by('-id')
     Art = News.filter(category=2).annotate(l_count=Count('likes')).order_by('-l_count')

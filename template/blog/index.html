@@ -108,7 +108,6 @@
 														</div>
 														<li style="float: right;"><a href="{% url 'blog:detail' Event.id Event.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{Event|Comment_count}}</a></li>
 						
-														<!-- <li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
 													</ul>
 													
 												</div><!-- dplay-tbl-cell -->
@@ -121,28 +120,28 @@
 						{% endfor %}
 					</div>
 
-					<h4 class="mb-30 mt-20 clearfix"><b>Whats trending</b></h4>
+					<h4 class="mb-30 mt-20 clearfix"><b>Trending Articles</b></h4>
 					
 					<div class="row">
 						
 						<!-- START OF SECOND PARA -->
-						{% for art in Art %}
+						{% for article in Articles %}
 						{% if forloop.counter < 7 %}	
 					
 						<div class="col-sm-6 col-md-6 col-lg-6 col-xl-4 mb-30">
 						
 							<!-- SETTING IMAGE WITH bg-4 -->
-							<div class="card h-100 pos-relative bg-4 bg-layer-4 color-white" style="background: url('/media/{{art.post_image}}'); background-position: center; background-size: cover;">
+							<div class="card h-100 pos-relative bg-4 bg-layer-4 color-white " style="background: url('/media/{{article.post_image}}'); background-position: center; background-size: cover;">
 								<div class="plr-25 ptb-15">
-									<h5 class="color-grey"><b>{{art.category}}</b></h5>
-									<h4 class="mtb-10"><a href="{% url 'blog:detail' art.id art.slug %}"><b>{{art.title }}</b></a></h4>
+									<h5 class="color-grey"><b>{{article.category}}</b></h5>
+									<h4 class="mtb-10"><a href="{% url 'blog:detail' article.id article.slug %}"><b>{{article.title }}</b></a></h4>
+									<p id="author">-{{article.author}}</p>
 									<ul class="list-li-mr-10 color-grey">
 
-										<div class="like-section{{art.id}}">
-											{% include 'blog/like.html' with condtion=art %}
+										<div class="like-section{{article.id}}">
+											{% include 'blog/like.html' with condtion=article %}
 										</div>
-										<li style="float: right;"><a href="{% url 'blog:detail' art.id art.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{art|Comment_count}}</a></li>
-										<!-- <li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
+										<li style="float: right;"><a href="{% url 'blog:detail' article.id article.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{article|Comment_count}}</a></li>
 									</ul>
 								</div><!-- hot-news -->
 							</div><!-- card -->
@@ -150,49 +149,9 @@
 
 						{% endif %}
 						{% endfor %}
-						
-						<!-- END OF SECOND PARA -->
-						<!-- END OF THIRD PARA -->
+
 					</div><!-- row -->
 
-
-
-
-
-					<h4 class="mb-30 mt-20 clearfix"><b>Trending Articles</b></h4>
-
-					<div class="row">
-						
-						{% for article in Articles %}
-						{% if forloop.counter < 7 %}
-						<!-- START OF FIRST PARA -->
-						<div class="col-md-6 col-lg-6 col-xl-4 mb-30" >
-							<div class="card h-100 " >
-
-								<div class="plr-25 ptb-15">
-									<h5 class="color-ash"><b>{{article.category}}</b></h5>
-									<h4 class="mtb-10"><a href="{% url 'blog:detail' article.id article.slug %}"><b>{{article.title}}</b></a></h4>
-									<p id="author">-{{article.author}}</p>
-									<ul class="list-li-mr-10 color-black">
-
-										<div class="like-section{{article.id}}">
-											{% include 'blog/like.html' with condtion=article %}
-										</div>
-										<li style="float: right;"><a href="{% url 'blog:detail' article.id article.slug %}#comment"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>{{article|Comment_count}}</a></li>
-										<!-- <li style="float: right;"><i class="mr-5 font-12 ion-ios-chatbubble-outline"></i>105</li> -->
-									</ul>	
-								</div><!-- hot-news -->
-							</div><!-- card -->
-						</div><!-- col-lg-4 col-md-6 -->
-						{% endif %}
-						{% endfor %}
-						
-						
-					
-					
-						<!-- END OF FIRST PARA -->
-					</div><!-- row -->
-					
 					
 					
 					<h4 class="mb-30 mt-20 clearfix"><b>Most Popular Videos</b></h4>
@@ -234,6 +193,7 @@
 													<div class="swiper-slide">
 														<div class="pos-relative">
 															<a href="{% url 'blog:detail' Art_Video.id Art_Video.slug %}"><img src="/media/{{Art_Video.post_image}}" alt=""></a>
+															<h4 class="mtb-10"><a href="{% url 'blog:detail' Art_Video.id Art_Video.slug %}"><b>{{Art_Video.title }}</b></a></h4>
 														</div><!-- pos-relative -->
 													</div><!-- swiper-slide -->
 												
@@ -256,7 +216,6 @@
 					
 					{% include 'blog/RandomPosts.html' with Top=Top %}
 					
-					<h6 class="text-center mt-20"><a class="btn-brdr-grey color-ash plr-30" href="#"><b>LOAD MORE</b></a></h6>
 				</div><!-- col-sm-9 -->
 				
 				{% include 'blog/side_bar.html' with Art=side_Art %}

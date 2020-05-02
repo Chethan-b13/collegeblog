@@ -9,7 +9,7 @@ from ckeditor.fields import RichTextField
 class UserInfo(models.Model):
     user        = models.OneToOneField(User, on_delete=models.CASCADE)
     user_number = models.CharField(max_length=12, blank=True, default='')
-    profile_pic = models.ImageField(upload_to='profile_pics', blank=True, default='/profile_pics/def.jpg')
+    profile_pic = models.ImageField(upload_to='profile_pics', blank=True, default='/static/images/def.png')
     user_link   = models.URLField(max_length=200, blank=True)
     user_bio    = models.TextField(blank=True)
     
@@ -69,7 +69,6 @@ class Posts(models.Model):
     author        = models.ForeignKey(UserInfo, on_delete=models.CASCADE)
     slug          = models.SlugField(max_length=200)
     post_link     = models.URLField(max_length=200, null=True,blank=True)
-    is_hot        = models.BooleanField(default= False, null= True, blank= True)
     status        = models.CharField(max_length=20, choices=status_choices, default='Draft')
 
 

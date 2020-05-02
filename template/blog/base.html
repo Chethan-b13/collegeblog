@@ -49,17 +49,17 @@
 		<a class="menu-nav-icon" data-menu="#main-menu" href="#"><i class="ion-navicon"></i></a>	
 		<ul class="main-menu" id="main-menu">
 			<li><a href="{% url 'blog:home' %}">Home</a></li>
-			<li class="drop-down"><a href="{% url 'blog:category' id=3 category='Articles' %}">Articles<i class="ion-arrow-down-b"></i></a>
-				<ul class="drop-down-menu drop-down-inner">
+			<li ><a href="{% url 'blog:category' id=3 category='Articles' %}">Articles</a>
+				<!-- <ul class="drop-down-menu drop-down-inner">
 					<li><a href="#">Student's articles</a></li>
 					<li><a href="#">Teacher's Articles</a></li>
-				</ul>
+				</ul> -->
 			</li>
-			<li class="drop-down"><a href="{% url 'blog:category' id=1 category='Events' %}">Events<i class="ion-arrow-down-b"></i></a>
-				<ul class="drop-down-menu drop-down-inner">
+			<li><a href="{% url 'blog:category' id=1 category='Events' %}">Events</a>
+				<!-- <ul class="drop-down-menu drop-down-inner">
 					<li><a href="#">College</a></li>
 					<li><a href="#">Inter-college</a></li>
-				</ul>
+				</ul> -->
 			</li>
 			<li><a href="{% url 'blog:category' id=2 category='Art' %}">Art ShowCase</a></li>
 			<li><a href="#">About College</a></li>

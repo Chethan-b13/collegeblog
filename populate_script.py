@@ -25,13 +25,13 @@ def create_post(N):
         status = random.choice(['Published','Draft'])
         desc = fake.text()
         Posts.objects.create(title=title+"'s post!!" , 
-        desc = desc , category=Category.objects.get(id=cat_id),
-        author= UserInfo.objects.get(user=User.objects.order_by('?').first()),
-        status = status,
-        slug = "-".join(title.lower().split()),
-        uploaded_date = timezone.now(),
-        updated_date = timezone.now()
-        )
+                    desc = desc , category=Category.objects.get(id=cat_id),
+                    author= UserInfo.objects.get(user=User.objects.order_by('?').first()),
+                    status = status,
+                    slug = "-".join(title.lower().split()),
+                    uploaded_date = timezone.now(),
+                    updated_date = timezone.now()
+                    )
 
 
 

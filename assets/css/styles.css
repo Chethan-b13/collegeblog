@@ -440,6 +440,7 @@ header .main-menu li.drop-down a.mouseover + ul.drop-down-menu{ display: block;
 .color-facebook{ color: #365B99; }
 .color-twitter{ color: #58ADEE; }
 .color-google{ color: #E14A3D; }
+.color-whatsapp{ color: #25D366;}
 
 /* BACKGROUND COLOR*/
 

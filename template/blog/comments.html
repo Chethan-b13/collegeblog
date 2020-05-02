@@ -14,7 +14,7 @@
             {% if request.user.is_authenticated %}
                 <button class="btn-b-lg btn-brdr-primary plr-25 color-black" type="submit"><b>Post Comment</b></button>
             {% else %}
-                <button class="btn-b-lg btn-brdr-grey plr-25 color-ash" type="submit" disabled><b>Post Comment</b></button>
+                <button class="btn-b-lg btn-brdr-grey plr-25 color-ash" type="submit" disabled><b>Login to comment</b></button>
             {% endif %}
         </form>
     </div><!-- col-sm-6-->	
@@ -32,10 +32,10 @@
                     
                     <div class="sided-70x">
                         <div class="s-left">
-                            {% if Comment.user.useinfo.profile_pic %}
-                                <img src="/media/{{Comment.user.useinfo.profile_pic}}" alt="">
+                            {% if Comment.user.userinfo.profile_pic %}
+                                <img src="/media/{{Comment.user.userinfo.profile_pic}}" alt="">
                             {% else %}
-                                <img src="/media/profile_pics/def.png" alt="">
+                                <img src="/static/images/def.png" alt="">
                             {% endif %}
                         </div><!-- s-left-->
                         
