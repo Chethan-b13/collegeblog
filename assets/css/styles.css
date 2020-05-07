@@ -448,6 +448,7 @@ header .main-menu li.drop-down a.mouseover + ul.drop-down-menu{ display: block;
 .bg-primary{ background: #F9B500!important; }
 .bg-2-white{ background: #F2F2F2; }
 .bg-1-white{ background: #F8F8F8; }
+.bg-1-gray{background: rgb(214, 214, 214);}
 
 .bg-tp-5{ background: rgba(0,0,0,.5); }
 

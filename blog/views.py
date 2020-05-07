@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import JsonResponse
 from django.db.models import Count
+# from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.views import generic
+from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from .models import Posts, Comment, Category
 from Accounts.forms import CommentForm
@@ -97,12 +99,14 @@ def CommentDelete(request, id):
     post = comment.Post
     comment.delete()
     comments = Comment.objects.filter(Post=post.id, Reply=None).order_by('-id')
+    
     context = {
         'Comments':comments,
         'comment_form' : CommentForm()
     }
 
     if request.is_ajax():
+        messages.info(request, 'Comment Deleted successfully')
         html = render_to_string('blog/comments.html', context, request=request)
         return JsonResponse({'form': html})
 
@@ -115,3 +119,30 @@ def Category_List(request, id, category):
     return render(request, 'blog/category.html', {'Category_Posts':category_post, 'category':category,
                                                   'Top4_side':News[:4], 'Art':Art })
                                                             
+                                                    
+                                                    
+def Contact(request):
+    
+    if request.method == "POST":
+        name = request.POST.get('sendername')
+        Sender_mail = request.POST.get('email')
+        Subject = "Message from college blog website by {}".format(name)
+        message = request.POST.get('message') + "by {}".format(Sender_mail)
+        send_mail(
+            Subject,
+            message,
+            Sender_mail,
+            ['chethancheths13@gmail.com'],
+            fail_silently=False,
+            )
+        messages.success(request, "Message has be sent. Soon we will get in touch with you")
+
+        return redirect(request.META.get('HTTP_REFERER'))
+        
+    return render(request, 'blog/contact.html')
+
+
+def AboutPage(request):
+    News = Posts.published.all().order_by('-id')
+    How_Posts = Posts.objects.filter(is_static=True)
+    return render(request, 'blog/about.html', {'How_Posts':How_Posts, 'Top4_side':News[:4]})

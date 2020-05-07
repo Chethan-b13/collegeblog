@@ -698,6 +698,11 @@ header .main-menu li.drop-down a.mouseover + ul.drop-down-menu{ display: block;
 .btn-b-sm{ font-size: .9em; height: 30px; line-height: 28px; }
 
 
+/* for activate navbar */
+.active{
+	font-size: x-small;
+}
+
 
 /* FORM INPUT STYLING */
 

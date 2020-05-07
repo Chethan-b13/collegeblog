@@ -12,7 +12,10 @@ from Accounts.forms import ProfileForm , AdminUserForm
 def profile(request, id, username):
     # user = UserInfo.objects.get_or_create(user=User.objects.get(pk=id))
     user = get_object_or_404(UserInfo, user=User.objects.get(pk=id))
-    Cat_posts = Posts.objects.filter(author=user)
+    if request.user.id == id:
+        Cat_posts = Posts.objects.filter(author=user)
+    else:
+        Cat_posts = Posts.published.filter(author=user)
     Top4_side = Posts.published.all().order_by('-likes')[:4]
     return render(request, 'profile/profile.html', {'USER':user, 'Cat_posts':Cat_posts, 'Top4_side':Top4_side})
 

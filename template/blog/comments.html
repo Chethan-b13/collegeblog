@@ -3,14 +3,18 @@
 <div class="row">
     <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-8">
         <form method="POST" class="Comment-form form-block form-h-55 form-plr-20 form-bg-white" action=".">
-            {% include 'alerts.html' %}
             {% csrf_token %}
+            
             <div class="row">
                 <div class="textarea col-sm-12 mb-30" aria-rowcount="8" aria-colcount="25">
                     {{comment_form.content}}
                 </div><!-- col-sm-12-->
                 
             </div><!-- row-->
+
+            {% include 'alerts.html' %}
+
+            
             {% if request.user.is_authenticated %}
                 <button class="btn-b-lg btn-brdr-primary plr-25 color-black" type="submit"><b>Post Comment</b></button>
             {% else %}

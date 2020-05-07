@@ -103,7 +103,7 @@ def Logout(request):
     return redirect('blog:home')
 
 
-@login_required(login_url="/accounts/login/")
+@login_required
 def CreatePost(request):
     if request.method == 'POST':
         form = PostCreationForm(request.POST, request.FILES)

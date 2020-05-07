@@ -40,7 +40,7 @@ class Category(models.Model):
 
 
     class Meta:
-        verbose_name_plural = "Categories"   
+        verbose_name_plural = "Categories"
 
 # custom manager which returns only published posts
 class PublishManager(models.Manager):
@@ -59,10 +59,10 @@ class Posts(models.Model):
         ('Publish','Publish'),
     )
     title         = models.CharField(max_length=200, default='')
-                                    
     post_image    = models.ImageField(upload_to='pics', default='/pics/campus.jpg')
     desc          = RichTextField()
     uploaded_date = models.DateTimeField(auto_now_add=True)
+    is_static     = models.BooleanField(default=False, blank=True) #only for the admin use aka static posts in about page
     updated_date  = models.DateTimeField(auto_now=True)
     category      = models.ForeignKey(Category, on_delete=models.CASCADE)
     likes         = models.ManyToManyField(User, related_name='likes', blank=True)
