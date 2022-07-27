@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import JsonResponse
 from django.db.models import Count
-# from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.template.loader import render_to_string
@@ -11,22 +10,25 @@ from django.contrib.auth.decorators import login_required
 from .models import Posts, Comment, Category
 from Accounts.forms import CommentForm
 
+
 class Indexview(generic.ListView):
     template_name = 'blog/index.html'
     model = Posts
+
     def get_context_data(self, *, object_list=None, **kwargs):
-        
+
         Hot_News = Posts.published.all().order_by('-id')
-        Events = Hot_News.filter(category=1).annotate(l_count=Count('likes')).order_by('-l_count')
-        Articles = Hot_News.filter(category=3).annotate(l_count=Count('likes')).order_by('-l_count')
-        Art = Hot_News.filter(category=2).annotate(l_count=Count('likes')).order_by('-l_count')
+        Events = Hot_News.filter(category=1).annotate(
+            l_count=Count('likes')).order_by('-l_count')
+        Articles = Hot_News.filter(category=3).annotate(
+            l_count=Count('likes')).order_by('-l_count')
+        Art = Hot_News.filter(category=2).annotate(
+            l_count=Count('likes')).order_by('-l_count')
         Top = Hot_News.annotate(l_count=Count('likes')).order_by('-l_count')
 
-        return {'Hot_News':Hot_News, 'Top':Top, 'Articles':Articles, 'Art':Art, 
-                'Top4_side':Hot_News[:4], 'side_Art':Art, 'Events':Events
+        return {'Hot_News': Hot_News, 'Top': Top, 'Articles': Articles, 'Art': Art,
+                'Top4_side': Hot_News[:4], 'side_Art': Art, 'Events': Events
                 }
-
-
 
 
 @login_required
@@ -43,8 +45,8 @@ def PostLike(request):
     # return redirect(request.META.get('HTTP_REFERER'))
 
     context = {
-        'is_liked':is_liked,
-        'condtion':post,
+        'is_liked': is_liked,
+        'condtion': post,
     }
     if request.is_ajax():
 
@@ -56,8 +58,10 @@ def detailview(request, id, slug):
     Post = get_object_or_404(Posts, pk=id)
     comments = Comment.objects.filter(Post=Post, Reply=None).order_by('-id')
     News = Posts.published.all().order_by('-id')
-    ManyPosts = News.filter(category=Post.category).annotate(l_count=Count('likes')).order_by('-l_count')[:4]
-    Art = News.filter(category=2).annotate(l_count=Count('likes')).order_by('-l_count')
+    ManyPosts = News.filter(category=Post.category).annotate(
+        l_count=Count('likes')).order_by('-l_count')[:4]
+    Art = News.filter(category=2).annotate(
+        l_count=Count('likes')).order_by('-l_count')
 
     if request.method == 'POST':
         comment_form = CommentForm(request.POST or None)
@@ -71,38 +75,37 @@ def detailview(request, id, slug):
             content.Post = Posts.objects.get(id=Post.id)
             content.save()
             comment_form = CommentForm()
-            
+
     else:
         comment_form = CommentForm()
 
     context = {
-        'Post':Post, 
-        'Cat_posts':ManyPosts, 
-        'Top4_side':News[:4], 
-        'Comments':comments,
-        'comment_form':comment_form,
-        'Art':Art,        
+        'Post': Post,
+        'Cat_posts': ManyPosts,
+        'Top4_side': News[:4],
+        'Comments': comments,
+        'comment_form': comment_form,
+        'Art': Art,
     }
 
     if request.is_ajax():
-        messages.success(request,"Comment Posted !")
+        messages.success(request, "Comment Posted !")
         html = render_to_string('blog/comments.html', context, request=request)
         return JsonResponse({'form': html})
-
 
     return render(request, 'blog/detail.html', context)
 
 
 @login_required
 def CommentDelete(request, id):
-    comment = get_object_or_404(Comment,id=id)
+    comment = get_object_or_404(Comment, id=id)
     post = comment.Post
     comment.delete()
     comments = Comment.objects.filter(Post=post.id, Reply=None).order_by('-id')
-    
+
     context = {
-        'Comments':comments,
-        'comment_form' : CommentForm()
+        'Comments': comments,
+        'comment_form': CommentForm()
     }
 
     if request.is_ajax():
@@ -115,14 +118,14 @@ def Category_List(request, id, category):
     category_post = Posts.published.filter(category=id).order_by('-id')
     category = Category.objects.get(id=id)
     News = Posts.published.order_by('-id')
-    Art = News.filter(category=2).annotate(l_count=Count('likes')).order_by('-l_count')
-    return render(request, 'blog/category.html', {'Category_Posts':category_post, 'category':category,
-                                                  'Top4_side':News[:4], 'Art':Art })
-                                                            
-                                                    
-                                                    
+    Art = News.filter(category=2).annotate(
+        l_count=Count('likes')).order_by('-l_count')
+    return render(request, 'blog/category.html', {'Category_Posts': category_post, 'category': category,
+                                                  'Top4_side': News[:4], 'Art': Art})
+
+
 def Contact(request):
-    
+
     if request.method == "POST":
         name = request.POST.get('sendername')
         Sender_mail = request.POST.get('email')
@@ -134,15 +137,16 @@ def Contact(request):
             Sender_mail,
             ['chethancheths13@gmail.com'],
             fail_silently=False,
-            )
-        messages.success(request, "Message has be sent. Soon we will get in touch with you")
+        )
+        messages.success(
+            request, "Message has be sent. Soon we will get in touch with you")
 
         return redirect(request.META.get('HTTP_REFERER'))
-        
+
     return render(request, 'blog/contact.html')
 
 
 def AboutPage(request):
     News = Posts.published.all().order_by('-id')
     How_Posts = Posts.objects.filter(is_static=True)
-    return render(request, 'blog/about.html', {'How_Posts':How_Posts, 'Top4_side':News[:4]})
+    return render(request, 'blog/about.html', {'How_Posts': How_Posts, 'Top4_side': News[:4]})

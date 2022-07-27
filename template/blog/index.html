@@ -42,7 +42,7 @@
 										{% if forloop.counter < 6 %}
 											<div class="swiper-slide">
 												<div class="bg-white">
-													<img src="/media/{{Hot.post_image}}" alt="">
+													<img src="/media/{{Hot.post_image}}" alt="news">
 													
 													<div class="plr-25 ptb-15">
 														<h5 class="color-ash"><b>{{Hot.category}}</b></h5>
@@ -192,7 +192,7 @@
 												
 													<div class="swiper-slide">
 														<div class="pos-relative">
-															<a href="{% url 'blog:detail' Art_Video.id Art_Video.slug %}"><img src="/media/{{Art_Video.post_image}}" alt=""></a>
+															<a href="{% url 'blog:detail' Art_Video.id Art_Video.slug %}"><img src="/media/{{Art_Video.post_image}}" alt="Art image"></a>
 															<h4 class="mtb-10"><a href="{% url 'blog:detail' Art_Video.id Art_Video.slug %}"><b>{{Art_Video.title }}</b></a></h4>
 														</div><!-- pos-relative -->
 													</div><!-- swiper-slide -->

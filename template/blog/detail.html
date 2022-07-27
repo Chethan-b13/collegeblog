@@ -51,17 +51,12 @@
 					<h5 class="mt-40 color-facebook"><b>Links :</b></h5>
 
 					{% if Post.post_link  %}	
-						<p >Post Related : <a href="{{Post.post_link}}" class="text-info"> {{Post.post_link | truncatechars:60 |urlize}} </a></p>
+						<p >Post Related : <a href="{{Post.post_link}}"> {{Post.post_link | truncatechars:60 |urlize}} </a></p>
 					{% endif %}
 					{% if Post.author.user_link  %}	
-						<p class="mb-30">User Related : <a href="{{Post.author.user_link }}" class="text-info"> {{Post.author.user_link | urlize}}</a></p>
+						<p class="mb-30">User Related : <a href="{{Post.author.user_link }}"> {{Post.author.user_link | urlize}}</a></p>
 					{% endif %}
 					<hr>
-					<!-- <p class="mb-50">Though I was eager to share the results of the experiment with others who suffer from depression or other mood issues, my previous book, 
-					Love and Treasure, was a novel set against the backdrop of the Holocaust in Hungary. 
-					In support of that novel, I traveled around the country from Jewish community center to synagogue to Jewish book club.</p> -->
-					
-					
 					
 					<div class="row">
 						<div class="col-sm-12 col-md-6">
@@ -69,9 +64,9 @@
 							<div class="sided-70x">
 								<div class="s-left">
 									{% if Post.author.profile_pic %}
-									<a href="{% url 'Profile:profile' id=Post.author.user.id username=Post.author %}"><img src="/media/{{Post.author.profile_pic}}" alt="" class="zoom"></a>
+									<a href="{% url 'Profile:profile' id=Post.author.user.id username=Post.author %}"><img src="/media/{{Post.author.profile_pic}}" alt="Profile Pic" class="zoom"></a>
 									{% else %}
-									<img src="/static/images/def.png" alt="No Profile Pic">
+									{% comment %} <img src="static/images/def.png" alt="No Profile Pic"> {% endcomment %}
 									{% endif %}
 								</div><!-- s-left-->
 								
@@ -85,7 +80,7 @@
 							<ul class="color-ash lh-70 text-right text-sm-left list-a-plr-10 font-13">
 								<li><b>SHARE</b></li>
 								<li>{% post_to_facebook request.build_absolute_uri  "<i class='color-facebook ion-social-facebook'></i>" %}</li>
-								<li>{% post_to_linkedin Share_title request.build_absolute_uri  "<i class='color-linkedin ion-social-linkedin'></i>" %}</li>
+								<li>{% post_to_linkedin request.build_absolute_uri  "<i class='color-linkedin ion-social-linkedin'></i>" %}</li>
 								<li>{% post_to_whatsapp request.build_absolute_uri "<i class='color-whatsapp ion-social-whatsapp'></i>" %}</li>
 							</ul>
 						</div><!-- col-md-6-->

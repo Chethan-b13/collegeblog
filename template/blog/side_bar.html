@@ -9,7 +9,7 @@
                     {% for Top4 in Top4_side %}
                         <div class="sided-80x mb-20">
                             <div class="s-left img-hover-zoom" style="overflow: hidden;">
-                                <img src="/media/{{Top4.post_image}}" alt="">
+                                <img src="/media/{{Top4.post_image}}" alt="Post Image">
                             </div><!-- s-left -->
                             <div class="s-right">
                                 <h5 class="pt-5"  style="overflow-x: hidden;width: 100px;"><a href="{% url 'blog:detail' Top4.id Top4.slug %}"><b>{{Top4.title}}</b></a></h5>
@@ -22,7 +22,7 @@
                 
                 <a class="mb-50 pos-relative dplay-block" href="#">
                     
-                    <img src="{% static 'images/sidebar_2_400X600.jpg' %}" alt="">
+                    <img src="{% static 'images/sidebar_2_400X600.jpg' %}" alt="add">
                     <div class="abs-tblr z-10 bg-layer-4">
                     
                         <div class="dplay-tbl text-center color-white">
@@ -42,7 +42,7 @@
                             <div class="sided-80x mb-20">
                                 <div class="s-left">
                                     <a class="v-icn" href="{{Art_video.post_link}}"><i class="ion-play"></i></a>
-                                    <img src="/media/{{Art_video.post_image}}" alt="">
+                                    <img src="/media/{{Art_video.post_image}}" alt="Art">
                                 </div><!-- s-left -->
                                 <div class="s-right">
                                     <h5 class="pt-5"><a href="{% url 'blog:detail' Art_video.id Art_video.slug %}"><b>{{Art_video.title}}</b></a></h5>

@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 
-
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -36,7 +34,7 @@ SECRET_KEY = 'g=q1y5+j0fc+c$5anc!6d&uzejt!m4rf=6c5#lwo$lsar63(%1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '192.168.2.18', '127.0.0.1',]
+ALLOWED_HOSTS = ['localhost', '192.168.2.18', '127.0.0.1', ]
 
 
 # Application definition
@@ -53,27 +51,30 @@ INSTALLED_APPS = [
     'ckeditor',
     'django_cleanup.apps.CleanupConfig',
     'django_social_share',
-    
+    'django_seed',
+    'django_unused_media',
+
 ]
 
 CKEDITOR_UPLOAD_PATH = "editorUplods/"
 
 CKEDITOR_CONFIGS = {
-    'default':{
-        'toolbar':'Custom',
-        'width':'revert',
-        'margin':None,
+    'default': {
+        'toolbar': 'Custom',
+        'width': 'revert',
+        'margin': None,
         'height': 175,
-        'toolbar_Custom':[
+        'toolbar_Custom': [
             # ['Bold', 'Italic', 'Underline', 'StrikeThrough',
             # 'Link', 'Smiley', 'TextColor', 'IFrame',
-            # 'Table' 
+            # 'Table'
             # ]
-            ["Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker",'TextColor'],
-                ['JustifyLeft', 'JustifyCenter',
-                 'JustifyRight', 'JustifyBlock'],
-                ["Image", "Table", "Link", "Smiley"], ['Undo', 'Redo'],
-                ["Maximize"]
+            ["Format", "Bold", "Italic", "Underline",
+                "Strike", "SpellChecker", 'TextColor'],
+            ['JustifyLeft', 'JustifyCenter',
+             'JustifyRight', 'JustifyBlock'],
+            ["Image", "Table", "Link", "Smiley"], ['Undo', 'Redo'],
+            ["Maximize"]
         ],
     }
 }
@@ -125,11 +126,13 @@ WSGI_APPLICATION = 'collegeblog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'chethsblog',
-        'USER' : 'cheths',
-        'PASSWORD': '12345' ,
-        'HOST': 'localhost',
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'CollegeBlog',
+        # 'USER': 'chethan_cheths',
+        # 'PASSWORD': 'Cheths123',
+        # 'HOST': 'localhost',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
 
@@ -174,7 +177,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-STATIC_ROOT = os.path.join(BASE_DIR,'assets')
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 
 MEDIA_URL = '/media/'
@@ -183,8 +186,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = 'blog:home'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get(
+    'SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('SOCIAL_AUTH_FACEBOOK_KEY')
 SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('SOCIAL_AUTH_FACEBOOK_SECRET')
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.10'
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
