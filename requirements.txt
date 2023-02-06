@@ -13,7 +13,7 @@ django-social-share==2.3.0
 django-unused-media==0.2.2
 Faker==13.15.1
 idna==3.3
-oauthlib==3.2.0
+oauthlib==3.2.2
 Pillow==9.2.0
 pycparser==2.21
 PyJWT==2.4.0
